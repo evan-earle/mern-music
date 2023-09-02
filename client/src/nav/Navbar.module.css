@@ -1,0 +1,148 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-weight: 600;
+}
+
+:root {
+  --mainColor: rgba(0, 0, 0, 0.1);
+  --textColor: rgba(34, 34, 34);
+}
+
+header {
+  color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  height: 10vh;
+  background-color: var(--mainColor);
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 15rem;
+  margin: 0 3rem 0 4rem;
+}
+
+nav a {
+  text-decoration: none;
+  color: rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+}
+
+.search-container {
+  background: white;
+  position: relative;
+  width: 100%;
+  border-radius: 0.4rem;
+}
+
+input {
+  width: 15rem;
+  display: block;
+  -webkit-tap-highlight-color: rgba(207, 30, 30, 0);
+  text-align: left;
+  line-height: 1.21428571em;
+  padding: 0.67857143em 1em;
+  background: #ffffff;
+  border: 1px solid rgba(34, 36, 38, 0.15);
+  color: rgba(0, 0, 0, 0.6);
+
+  box-shadow: none;
+  outline: none;
+  font-weight: 800;
+}
+
+input:focus {
+  border-color: #85b7d9;
+  background: #ffffff;
+  box-shadow: none;
+  border-radius: 0.28571429rem;
+}
+
+.FontAwesomeGlass {
+  color: rgba(0, 0, 0, 0.6);
+  background: transparent;
+  border: none;
+  display: inline-block;
+  font-size: 20px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 10px 15px;
+}
+
+.hamburger {
+  background-color: transparent;
+  border: 10px;
+  color: rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+  font-size: 30px;
+  margin-left: 32px;
+  line-height: 70px;
+  display: none;
+}
+
+.animate {
+  --animate-duration: 0s;
+}
+
+@media screen and (max-width: 768px) {
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    position: fixed;
+    top: -1750px;
+    width: 100%;
+    height: 100vh;
+    background-color: #ffffff;
+    box-shadow: 0 40px 60px rgba(0, 0, 0, 0.1);
+    padding: 20px 0 0 10px;
+    color: black;
+    margin: 0;
+  }
+
+  header {
+    justify-content: flex-end;
+    gap: 5%;
+  }
+
+  .animate {
+    --animate-duration: 0.5s;
+  }
+
+  a,
+  nav a {
+    margin-top: 2rem;
+    color: rgba(0, 0, 0, 0.6);
+  }
+
+  .hamburger {
+    display: block;
+    margin-right: 2rem;
+    z-index: 1;
+  }
+
+  .active {
+    top: 80px;
+    margin: 0;
+    width: 100%;
+    background-color: #ffffff;
+    color: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+  }
+}
+
+@media screen and (max-width: 365px) {
+  header {
+    gap: 0;
+  }
+  .hamburger {
+    margin: 0 1rem 0 2rem;
+  }
+}
