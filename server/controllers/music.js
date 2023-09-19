@@ -17,3 +17,19 @@ export const getVideo = async (req, res, next) => {
     return next(err);
   }
 };
+
+export const starVideo = async (req, res, next) => {
+  try {
+    return res.status(200).json(data);
+  } catch (err) {
+    return next(err);
+  }
+};
+
+export const deleteVideo = async (req, res, next) => {
+  try {
+    return res.status(200).json(data);
+  } catch (err) {
+    return next(err);
+  }
+};
