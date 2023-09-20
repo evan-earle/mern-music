@@ -3,7 +3,7 @@ import express from "express";
 import cors from "cors";
 import morgan from "morgan";
 import cookieParser from "cookie-parser";
-// import allRoutes from "./routes/index.js";
+import allRoutes from "./routes/index.js";
 import { connectToDB } from "./config/database.js";
 import dotenv from "dotenv";
 import path from "path";
@@ -27,7 +27,7 @@ app.use(express.urlencoded({ extended: true }));
 connectToDB();
 
 // Routes
-// app.use("/api", allRoutes);
+app.use("/api", allRoutes);
 
 // error handler
 app.use((err, req, res, next) => {
