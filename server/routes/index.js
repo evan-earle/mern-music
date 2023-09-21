@@ -8,6 +8,6 @@ const router = express.Router();
 
 router.use("/auth", authRoutes);
 router.use("/users", checkAuth, usersRoutes);
-router.use("/music", musicRoutes);
+router.use("/music", checkAuth, musicRoutes);
 
 export default router;

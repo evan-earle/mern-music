@@ -1,6 +1,25 @@
 import axios from "axios";
 import Starred from "../models/Starred.js";
 
+export const getProfile = async (req, res, next) => {
+  try {
+    const starred = await Starred.findOne({ user: req.user.id });
+
+    if (!starred) {
+      const newStarred = new Starred({
+        video: "",
+        artist: "",
+        song: "",
+        user: req.user.id,
+      });
+      await newStarred.save();
+    }
+    return res.status(201).json(starred);
+  } catch (err) {
+    return next(err);
+  }
+};
+
 export const getVideo = async (req, res, next) => {
   const song = req.params.song;
 
