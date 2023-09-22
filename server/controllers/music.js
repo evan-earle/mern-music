@@ -38,6 +38,22 @@ export const getVideo = async (req, res, next) => {
   }
 };
 
+export const getArtist = async (req, res, next) => {
+  const artist = "ollie";
+
+  try {
+    const response = await axios.get(
+      `http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${artist}&api_key=${process.env.LAST_FM_API_KEY}&format=json`
+    );
+
+    const data = response.data;
+
+    return res.status(200).json(data);
+  } catch (err) {
+    return next(err);
+  }
+};
+
 export const starVideo = async (req, res, next) => {
   console.log(req.user);
   try {
