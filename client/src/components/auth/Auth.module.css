@@ -1,0 +1,80 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-weight: 600;
+}
+
+.Auth-form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 80vh;
+}
+
+img {
+  width: 35rem;
+  height: 22rem;
+  box-shadow: rgb(0 0 0 / 16%) 1px 1px 10px;
+}
+
+.Auth-form {
+  width: 25rem;
+  height: 22rem;
+  box-shadow: rgb(0 0 0 / 16%) 1px 1px 10px;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  border-radius: 0px 8px 8px 0px;
+  background-color: white;
+}
+
+.Auth-form-content {
+  padding-left: 3rem;
+  padding-right: 3rem;
+}
+
+.Auth-form-title {
+  text-align: center;
+  margin-bottom: 1em;
+  font-size: 1.5rem;
+  color: rgb(34, 34, 34);
+  font-weight: 800;
+}
+
+label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: rgb(34, 34, 34);
+}
+
+.link-primary {
+  cursor: pointer;
+}
+
+@media screen and (max-width: 1000px) {
+  .Auth-form-container {
+    height: 100vh;
+    background-image: url(../../assets/clearDay.jpg);
+    background-size: cover;
+  }
+  img {
+    display: none;
+  }
+  .Auth-form {
+    width: 25rem;
+    border-radius: 8px 8px 8px 8px;
+  }
+}
+
+@media screen and (max-width: 460px) {
+  .Auth-form {
+    width: 18rem;
+    height: 22rem;
+    box-shadow: rgb(0 0 0 / 60%) 5px 5px 10px;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    border-radius: 8px 8px 8px 8px;
+    background-color: white;
+  }
+}

@@ -1,8 +1,6 @@
-import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Auth } from "./pages/Auth";
 import { Search } from "./pages/Search";
-import { Home } from "./pages/Home";
 import { EditProfile } from "./pages/EditProfile";
 import { Toaster } from "react-hot-toast";
 import PrivateRoutes from "./components/PrivateRoutes";
@@ -21,7 +19,6 @@ function App() {
       <Router>
         <Routes>
           <Route element={<PrivateRoutes />}>
-            <Route path="/" element={<Home />} />
             <Route path="/search" element={<Search />} />
             <Route path="/edit-profile" element={<EditProfile />} />
           </Route>
