@@ -19,7 +19,7 @@ export const Login = ({ authType }) => {
         username,
         password,
       });
-      const firstLogin = await axios.get("/api/weather");
+      const firstLogin = await axios.get("/api/music");
       firstLogin.data === null || firstLogin.data.mainCity === ""
         ? navigate("/search")
         : navigate("/");
