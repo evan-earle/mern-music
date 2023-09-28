@@ -39,7 +39,7 @@ export const getVideo = async (req, res, next) => {
 };
 
 export const getArtist = async (req, res, next) => {
-  const artist = "ollie";
+  const artist = req.params.artist;
 
   try {
     const response = await axios.get(

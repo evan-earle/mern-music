@@ -47,3 +47,14 @@ export const updateFirstLogin = async (req, res, next) => {
     return next(err);
   }
 };
+
+export const updateLastSearch = async (req, res, next) => {
+  try {
+    const data = await User.findByIdAndUpdate(req.user.id, {
+      lastSearch: req.params.artist,
+    }).select("lastSearch");
+    return res.status(200).json(data);
+  } catch (err) {
+    return next(err);
+  }
+};

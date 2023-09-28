@@ -17,6 +17,10 @@ const userSchema = new Schema(
       required: true,
       default: true,
     },
+    lastSearch: {
+      type: String,
+      required: false,
+    },
   },
   { timestamps: true }
 );

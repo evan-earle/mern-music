@@ -11,7 +11,7 @@ export const Search = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.get(`/api/music/artist/${search}`);
+      await axios.put(`/api/users/lastSearch/${search}`);
       navigate("/");
     } catch (err) {
       console.log(err);
