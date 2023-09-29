@@ -44,9 +44,14 @@ export const Navbar = ({ search }) => {
     }
   };
 
-  const submitSearch = (e) => {
+  const submitSearch = async (e) => {
     e.preventDefault();
     search(navSearch);
+    try {
+      await axios.put(`/api/users/lastSearch/${navSearch}`);
+    } catch (err) {
+      console.log(err);
+    }
     setNavSearch("");
   };
 
@@ -59,7 +64,7 @@ export const Navbar = ({ search }) => {
               <input
                 className="form-control"
                 type="text"
-                placeholder="Enter city"
+                placeholder="Enter artist"
                 onChange={(e) => setNavSearch(e.target.value)}
                 value={navSearch}
                 onSubmit={submitSearch}
