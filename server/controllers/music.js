@@ -20,7 +20,7 @@ export const getProfile = async (req, res, next) => {
   }
 };
 
-export const getVideo = async (req, res, next) => {
+export const getArtist = async (req, res, next) => {
   const song = req.params.song;
 
   try {
@@ -28,25 +28,12 @@ export const getVideo = async (req, res, next) => {
       axios.get(
         `https://www.googleapis.com/youtube/v3/search?key=${process.env.YOUTUBE_API_KEY}&type=video&part=snippet&q=${song}`
       ),
+      axios.get(
+        `http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${artist}&api_key=${process.env.LAST_FM_API_KEY}&format=json`
+      ),
     ]);
 
     const data = response.map((response) => response.data);
-
-    return res.status(200).json(data);
-  } catch (err) {
-    return next(err);
-  }
-};
-
-export const getArtist = async (req, res, next) => {
-  const artist = req.params.artist;
-
-  try {
-    const response = await axios.get(
-      `http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${artist}&api_key=${process.env.LAST_FM_API_KEY}&format=json`
-    );
-
-    const data = response.data;
 
     return res.status(200).json(data);
   } catch (err) {
