@@ -39,9 +39,7 @@ export const updateUser = async (req, res, next) => {
 
 export const updateFirstLogin = async (req, res, next) => {
   try {
-    const data = await User.findByIdAndUpdate(req.user.id, {
-      firstLogin: false,
-    }).select("firstLogin");
+    const data = await User.findByIdAndUpdate(req.user.id).select("lastSearch");
     return res.status(200).json(data);
   } catch (err) {
     return next(err);
@@ -51,6 +49,17 @@ export const updateFirstLogin = async (req, res, next) => {
 export const updateLastSearch = async (req, res, next) => {
   try {
     const data = await User.findByIdAndUpdate(req.user.id, {
+      lastSearch: req.params.artist,
+    }).select("lastSearch");
+    return res.status(200).json(data);
+  } catch (err) {
+    return next(err);
+  }
+};
+
+export const getLastSearch = async (req, res, next) => {
+  try {
+    const data = await User.findById(req.user.id, {
       lastSearch: req.params.artist,
     }).select("lastSearch");
     return res.status(200).json(data);
