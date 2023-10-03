@@ -1,4 +1,5 @@
 import axios from "axios";
+import Starred from "../models/Starred.js";
 
 export const getVideo = async (req, res, next) => {
   const song = req.params.song;
@@ -19,8 +20,15 @@ export const getVideo = async (req, res, next) => {
 };
 
 export const starVideo = async (req, res, next) => {
+  console.log(req.user);
   try {
-    return res.status(200).json(data);
+    const addVideo = await Starred.findOneAndUpdate(
+      { user: req.user.id },
+      {
+        video: req.params.video,
+      }
+    );
+    return res.status(200).json(addVideo);
   } catch (err) {
     return next(err);
   }
