@@ -4,7 +4,7 @@ import createError from "../utils/createError.js";
 
 export const getUserInfo = async (req, res, next) => {
   try {
-    const data = await User.findById(req.user.id).select("username");
+    const data = await User.findById(req.user.id).select("username firstLogin");
     return res.status(200).json(data);
   } catch (err) {
     return next(err);
@@ -32,6 +32,17 @@ export const updateUser = async (req, res, next) => {
     ).select("username password");
 
     return res.status(200).json(updatedUser);
+  } catch (err) {
+    return next(err);
+  }
+};
+
+export const updateFirstLogin = async (req, res, next) => {
+  try {
+    const data = await User.findByIdAndUpdate(req.user.id, {
+      firstLogin: false,
+    }).select("firstLogin");
+    return res.status(200).json(data);
   } catch (err) {
     return next(err);
   }

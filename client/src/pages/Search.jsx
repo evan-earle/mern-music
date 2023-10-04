@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
 import drizzleNight from "../assets/backgrounds/drizzleNight.jpg";
 import styles from "./Search.module.css";
@@ -11,26 +11,12 @@ export const Search = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`/api/weather/main/${search}`);
+      await axios.get(`/api/music/artist/${search}`);
       navigate("/");
     } catch (err) {
       console.log(err);
     }
   };
-
-  useEffect(() => {
-    (async () => {
-      try {
-        const firstLogin = await axios.get("/api/music");
-
-        firstLogin.data === null || firstLogin.data.mainCity === ""
-          ? navigate("/search")
-          : navigate("/");
-      } catch (err) {
-        console.log(err);
-      }
-    })();
-  }, []);
 
   return (
     <div className={styles["Auth-form-container"]}>

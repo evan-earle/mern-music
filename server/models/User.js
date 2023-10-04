@@ -12,6 +12,11 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
+    firstLogin: {
+      type: Boolean,
+      required: true,
+      default: true,
+    },
   },
   { timestamps: true }
 );
