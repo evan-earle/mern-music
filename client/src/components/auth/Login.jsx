@@ -9,6 +9,7 @@ import styles from "./Auth.module.css";
 export const Login = ({ authType }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [firstLogin, setFirstLogin] = useState(false);
 
   const navigate = useNavigate();
 
@@ -19,12 +20,11 @@ export const Login = ({ authType }) => {
         username,
         password,
       });
-      const firstLogin = await axios.get("/api/music");
-      firstLogin.data === null || firstLogin.data.mainCity === ""
-        ? navigate("/search")
-        : navigate("/");
+
+      firstLogin === false ? navigate("/search") : navigate("/");
 
       toast.success("Signed in");
+      setFirstLogin(true);
     } catch (err) {
       console.log(err);
       toast.error("Signin failed");

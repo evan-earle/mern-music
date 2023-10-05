@@ -21,7 +21,7 @@ export const Search = () => {
   useEffect(() => {
     (async () => {
       try {
-        const firstLogin = await axios.get("/api/weather");
+        const firstLogin = await axios.get("/api/music");
 
         firstLogin.data === null || firstLogin.data.mainCity === ""
           ? navigate("/search")
@@ -39,18 +39,16 @@ export const Search = () => {
         onSubmit={onSubmit}
       >
         <div className={styles["Auth-form-content"]}>
-          <h3 className={styles["Auth-form-title"]}>
-            Search for a weather forecast
-          </h3>
+          <h3 className={styles["Auth-form-title"]}>Search for an artist</h3>
 
           <div className="form-group mt-3">
-            <label htmlFor="username">City</label>
+            <label htmlFor="username">Artist</label>
             <input
               className="form-control mt-1"
               required
               type="text"
               onChange={(e) => setSearch(e.target.value)}
-              placeholder="Enter city"
+              placeholder="Enter artist"
             />
           </div>
           <div className="d-grid gap-2 mt-3">
