@@ -1,4 +1,5 @@
 import { Navbar } from "../components/nav/Navbar";
+import { Artist } from "../components/artist/Artist";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
@@ -32,6 +33,7 @@ export const Home = () => {
   return (
     <div>
       <Navbar search={getArtist} />
+      <Artist />
     </div>
   );
 };

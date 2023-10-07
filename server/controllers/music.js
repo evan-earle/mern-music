@@ -24,12 +24,16 @@ export const getArtist = async (req, res, next) => {
   const artist = req.params.artist;
 
   try {
-    const response = await axios.get(
-      `http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${artist}&api_key=${process.env.LAST_FM_API_KEY}&format=json`
-    );
+    const response = await Promise.all([
+      axios.get(
+        `http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${artist}&api_key=${process.env.LAST_FM_API_KEY}&format=json`
+      ),
+      axios.get(
+        `https://ws.audioscrobbler.com/2.0/?method=artist.getsimilar&artist=${artist}&api_key=${process.env.LAST_FM_API_KEY}&format=json&limit=9`
+      ),
+    ]);
 
-    const data = response.data;
-
+    const data = response.map((response) => response.data);
     return res.status(200).json(data);
   } catch (err) {
     return next(err);
