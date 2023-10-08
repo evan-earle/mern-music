@@ -31,6 +31,9 @@ export const getArtist = async (req, res, next) => {
       axios.get(
         `https://ws.audioscrobbler.com/2.0/?method=artist.getsimilar&artist=${artist}&api_key=${process.env.LAST_FM_API_KEY}&format=json&limit=9`
       ),
+      axios.get(
+        `https://ws.audioscrobbler.com/2.0/?method=artist.gettopalbums&artist=${artist}&api_key=${process.env.LAST_FM_API_KEY}&format=json&limit=9`
+      ),
     ]);
 
     const data = response.map((response) => response.data);
