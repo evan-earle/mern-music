@@ -1,5 +1,6 @@
 import { Navbar } from "../components/nav/Navbar";
 import { Artist } from "../components/artist/Artist";
+import { Youtube } from "../components/youtube/Youtube";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
@@ -54,6 +55,7 @@ export const Home = () => {
         artistPhoto={artistPhoto}
         tags={tags}
       />
+      <Youtube />
     </div>
   );
 };

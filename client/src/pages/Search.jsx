@@ -50,7 +50,7 @@ export const Search = () => {
       <img
         src={drizzleNight}
         alt="sunny"
-        className="animate__animated  animate__fadeInLeft"
+        className={`animate__animated  animate__fadeInLeft ${styles.searchImage}`}
       />
     </div>
   );
