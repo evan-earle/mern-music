@@ -3,6 +3,7 @@ import { Artist } from "../components/artist/Artist";
 import { Youtube } from "../components/youtube/Youtube";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import styles from "./Home.module.css";
 
 export const Home = () => {
   const [artist, setArtist] = useState("");
@@ -49,13 +50,15 @@ export const Home = () => {
   return (
     <div>
       <Navbar search={getArtist} />
-      <Artist
-        artist={artist}
-        description={description}
-        artistPhoto={artistPhoto}
-        tags={tags}
-      />
-      <Youtube />
+      <div className={styles.profileVideo}>
+        <Artist
+          artist={artist}
+          description={description}
+          artistPhoto={artistPhoto}
+          tags={tags}
+        />
+        <Youtube />
+      </div>
     </div>
   );
 };

@@ -1,3 +1,8 @@
+.container {
+  width: 65%;
+  border: solid 2px green;
+}
+
 .tags {
   text-transform: capitalize;
 }
