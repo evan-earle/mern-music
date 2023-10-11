@@ -24,6 +24,7 @@
     "mongoose": "^7.5.1",
     "morgan": "^1.10.0",
     "nodemon": "^3.0.1",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "spotify-web-api-node": "^5.0.2"
   }
 }

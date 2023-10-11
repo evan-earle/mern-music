@@ -1,5 +1,6 @@
 import axios from "axios";
 import Starred from "../models/Starred.js";
+import SpotifyWebApi from "spotify-web-api-node";
 
 export const getProfile = async (req, res, next) => {
   try {
@@ -21,22 +22,41 @@ export const getProfile = async (req, res, next) => {
 };
 
 export const getArtist = async (req, res, next) => {
-  const artist = req.params.artist;
-
   try {
-    const response = await Promise.all([
-      axios.get(
-        `http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${artist}&api_key=${process.env.LAST_FM_API_KEY}&format=json`
-      ),
-      axios.get(
-        `https://ws.audioscrobbler.com/2.0/?method=artist.getsimilar&artist=${artist}&api_key=${process.env.LAST_FM_API_KEY}&format=json&limit=9`
-      ),
-      axios.get(
-        `https://ws.audioscrobbler.com/2.0/?method=artist.gettopalbums&artist=${artist}&api_key=${process.env.LAST_FM_API_KEY}&format=json&limit=9`
-      ),
-    ]);
+    const spotifyApi = new SpotifyWebApi({
+      clientId: `${process.env.SPOTIFY_CLIENT_ID}`,
+      clientSecret: `${process.env.SPOTIFY_CLIENT_SECRET}`,
+      // redirectUri: "http://localhost:3001/api/music/artist/:artist",
+    });
+    const access = await spotifyApi.clientCredentialsGrant();
 
-    const data = response.map((response) => response.data);
+    // const data = whatever.data;
+
+    console.log("The access token expires in " + access.body["expires_in"]);
+    console.log("The access token is " + access.body["access_token"]);
+
+    // Save the access token so that it's used in future calls
+    spotifyApi.setAccessToken(access.body["access_token"]);
+
+    (err) => {
+      console.log("Something went wrong when retrieving an access token", err);
+    };
+
+    // const response = await Promise.all([
+    //   //   // axios.get(
+    //   //   //   `http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${artist}&api_key=${process.env.LAST_FM_API_KEY}&format=json`
+    //   //   // ),
+    //   //   // axios.get(
+    //   //   //   `https://ws.audioscrobbler.com/2.0/?method=artist.getsimilar&artist=${artist}&api_key=${process.env.LAST_FM_API_KEY}&format=json&limit=9`
+    //   //   // ),
+    //   //   // axios.get(
+    //   //   //   `https://ws.audioscrobbler.com/2.0/?method=artist.gettopalbums&artist=${artist}&api_key=${process.env.LAST_FM_API_KEY}&format=json&limit=9`
+    //   //   // ),
+
+    // ]);
+    const data = await spotifyApi.searchArtists("phora");
+    // const data = response.map((response) => response.data);
+    console.log(data);
     return res.status(200).json(data);
   } catch (err) {
     return next(err);

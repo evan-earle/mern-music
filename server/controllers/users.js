@@ -1,6 +1,7 @@
 import User from "../models/User.js";
 import bcryptjs from "bcryptjs";
 import createError from "../utils/createError.js";
+import SpotifyWebApi from "spotify-web-api-node";
 
 export const getUserInfo = async (req, res, next) => {
   try {
