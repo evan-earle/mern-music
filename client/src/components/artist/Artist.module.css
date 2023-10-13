@@ -1,7 +1,30 @@
 .container {
   width: 65%;
+
+  border: solid green 2px;
+  position: relative;
+}
+
+.artistTags {
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+  width: 50%;
+}
+
+.artist {
+  padding-left: 0.5rem;
+  font-weight: 800;
+  width: 100%;
+  font-size: 3vw;
 }
 
 .tags {
   text-transform: capitalize;
+  margin-left: 0.5rem;
+}
+
+.artistPhoto {
+  width: 55%;
+  height: 20rem;
 }

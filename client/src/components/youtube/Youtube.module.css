@@ -1,8 +1,9 @@
 .container {
   width: 35%;
+  border: solid red 2px;
 }
 
 .youtubeImage {
-  height: 15rem;
+  height: 20rem;
   width: 100%;
 }

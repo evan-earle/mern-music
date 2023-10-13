@@ -1,4 +1,6 @@
 .profileVideo {
   display: flex;
-  margin: 1rem;
+  padding: 1rem;
+
+  width: 100%;
 }

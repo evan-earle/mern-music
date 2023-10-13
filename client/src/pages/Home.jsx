@@ -7,7 +7,7 @@ import styles from "./Home.module.css";
 
 export const Home = () => {
   const [artist, setArtist] = useState("");
-  const [description, setDescription] = useState("");
+
   const [artistPhoto, setArtistPhoto] = useState("");
   const [tags, setTags] = useState("");
 
@@ -34,8 +34,9 @@ export const Home = () => {
       setArtistPhoto(data.data[0].body.images[0].url);
 
       //Getting array of tags, mapping to a new array, and joining them into a string
-      const artistTags = data.data[0].body.genres;
+      const artistTags = data.data[0].body.genres.slice(0, 4);
       const tags = artistTags.join(" / ");
+
       setTags(tags);
     } catch (err) {
       console.log(err);
@@ -50,12 +51,7 @@ export const Home = () => {
     <div>
       <Navbar search={getArtist} />
       <div className={styles.profileVideo}>
-        <Artist
-          artist={artist}
-          description={description}
-          artistPhoto={artistPhoto}
-          tags={tags}
-        />
+        <Artist artist={artist} artistPhoto={artistPhoto} tags={tags} />
         <Youtube />
       </div>
     </div>
