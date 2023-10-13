@@ -1,6 +1,7 @@
 import { Navbar } from "../components/nav/Navbar";
 import { Artist } from "../components/artist/Artist";
 import { Youtube } from "../components/youtube/Youtube";
+import { TopTracks } from "../components/music/TopTracks";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "./Home.module.css";
@@ -52,6 +53,7 @@ export const Home = () => {
       <Navbar search={getArtist} />
       <div className={styles.profileVideo}>
         <Artist artist={artist} artistPhoto={artistPhoto} tags={tags} />
+        <TopTracks />
         <Youtube />
       </div>
     </div>

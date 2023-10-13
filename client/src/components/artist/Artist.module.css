@@ -1,7 +1,6 @@
 .container {
-  width: 65%;
-
-  border: solid green 2px;
+  width: 35%;
+  /* border: solid green 2px; */
   position: relative;
 }
 
@@ -9,7 +8,7 @@
   position: absolute;
   bottom: 5px;
   left: 5px;
-  width: 50%;
+  width: 100%;
 }
 
 .artist {
@@ -25,6 +24,6 @@
 }
 
 .artistPhoto {
-  width: 55%;
+  width: 100%;
   height: 20rem;
 }

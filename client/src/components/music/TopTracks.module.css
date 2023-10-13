@@ -1,0 +1,15 @@
+.container {
+  width: 30%;
+  height: 20rem;
+  padding: 0 1rem;
+}
+
+.topTracksTitle {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  border-bottom: 1px solid black;
+  padding: 1rem;
+  font-size: 1.5rem;
+  background-color: #1c1c25;
+}
