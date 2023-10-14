@@ -44,8 +44,9 @@ export const getArtist = async (req, res, next) => {
     const artistId = searchArtist.body.artists.items[0].id;
 
     const response = await Promise.all([
-      await spotifyApi.getArtist(artistId),
-      await spotifyApi.getArtistRelatedArtists(artistId),
+      spotifyApi.getArtist(artistId),
+      spotifyApi.getArtistRelatedArtists(artistId),
+      spotifyApi.getArtistTopTracks(artistId, "CA"),
     ]);
 
     const data = response;

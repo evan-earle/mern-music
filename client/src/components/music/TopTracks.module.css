@@ -2,6 +2,7 @@
   width: 30%;
   height: 20rem;
   padding: 0 1rem;
+  overflow: hidden;
 }
 
 .topTracksTitle {
@@ -9,7 +10,40 @@
   justify-content: center;
   width: 100%;
   border-bottom: 1px solid black;
-  padding: 1rem;
-  font-size: 1.5rem;
+  padding: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
   background-color: #1c1c25;
+}
+
+.topTracksList {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+ul {
+  list-style-type: none;
+  font-size: 1.25rem;
+  width: 100%;
+  padding: 0;
+}
+
+li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.5rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  height: 2rem;
+  width: 100%;
+}
+
+li:hover {
+  backdrop-filter: brightness(80%);
+}
+
+.faStar:hover {
+  color: #ffbf00;
 }
