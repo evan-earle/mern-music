@@ -12,6 +12,7 @@ export const Home = () => {
   const [topTracks, setTopTracks] = useState("");
   const [artistPhoto, setArtistPhoto] = useState("");
   const [tags, setTags] = useState("");
+  const [search, setSearch] = useState("");
 
   const getArtistfromDB = async () => {
     try {
@@ -58,8 +59,8 @@ export const Home = () => {
       <Navbar search={getArtist} />
       <div className={styles.profileVideo}>
         <Artist artist={artist} artistPhoto={artistPhoto} tags={tags} />
-        <TopTracks artist={artist} topTracks={topTracks} />
-        <Youtube />
+        <TopTracks artist={artist} topTracks={topTracks} video={setSearch} />
+        <Youtube search={search} />
       </div>
     </div>
   );

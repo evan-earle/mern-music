@@ -19,8 +19,9 @@ export const TopTracks = (props) => {
 
   const getVideo = async (song) => {
     try {
-      const video = await axios.get(`/api/music/video/${artist} ${song}`);
-      console.log(video);
+      const getVideo = await axios.get(`/api/music/video/${artist} ${song}`);
+      const videoId = getVideo.data.items[0].id.videoId;
+      props.video(videoId);
     } catch (err) {
       console.log(err);
     }
