@@ -57,15 +57,14 @@ export const getArtist = async (req, res, next) => {
 };
 
 export const getVideo = async (req, res, next) => {
-  // const artist = req.params.artist;
+  const video = req.params.video;
 
   try {
     const response = await axios.get(
-      `https://www.googleapis.com/youtube/v3/search?key=${process.env.YOUTUBE_API_KEY}&type=video&part=snippet&q=${song}`
+      `https://www.googleapis.com/youtube/v3/search?key=${process.env.YOUTUBE_API_KEY}&type=video&part=snippet&q=${video}`
     );
 
     const data = response.data;
-
     return res.status(200).json(data);
   } catch (err) {
     return next(err);

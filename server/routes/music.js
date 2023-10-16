@@ -11,7 +11,7 @@ import {
 const router = express.Router();
 
 router.get("/", getProfile);
-router.get("/video/:song", getVideo);
+router.get("/video/:video", getVideo);
 router.get("/artist/:artist", getArtist);
 router.post("/add/:video", starVideo);
 router.delete("/delete", deleteVideo);

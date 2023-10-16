@@ -58,7 +58,7 @@ export const Home = () => {
       <Navbar search={getArtist} />
       <div className={styles.profileVideo}>
         <Artist artist={artist} artistPhoto={artistPhoto} tags={tags} />
-        <TopTracks topTracks={topTracks} />
+        <TopTracks artist={artist} topTracks={topTracks} />
         <Youtube />
       </div>
     </div>

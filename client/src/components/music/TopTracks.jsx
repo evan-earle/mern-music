@@ -2,8 +2,10 @@ import { useState } from "react";
 import styles from "./TopTracks.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
 
 export const TopTracks = (props) => {
+  const artist = props.artist;
   const [starred, setStarred] = useState([]);
 
   const clickStar = (index) => {
@@ -14,6 +16,16 @@ export const TopTracks = (props) => {
     }
     console.log(starred);
   };
+
+  const getVideo = async (song) => {
+    try {
+      const video = await axios.get(`/api/music/video/${artist} ${song}`);
+      console.log(video);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.topTracks}>
@@ -22,8 +34,9 @@ export const TopTracks = (props) => {
           <div className={styles.topTracksList}>
             <ul>
               {props.topTracks.map((track, index) => (
-                <li key={index}>
+                <li key={index} onClick={() => getVideo(track)}>
                   {track.length > 30 ? track.substring(0, 30) + "..." : track}
+
                   <FontAwesomeIcon
                     icon={faStar}
                     className={styles.faStar}
