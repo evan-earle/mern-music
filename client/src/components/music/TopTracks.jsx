@@ -3,9 +3,11 @@ import styles from "./TopTracks.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
+import "animate.css";
 
 export const TopTracks = (props) => {
   const [starred, setStarred] = useState([]);
+  const [active, setActive] = useState(-1);
 
   const getStarred = async () => {
     try {
@@ -17,15 +19,17 @@ export const TopTracks = (props) => {
   };
 
   const clickStar = async (index, track) => {
-    console.log(starred);
+    console.log(index);
     if (starred.includes(track)) {
+      setActive(index);
       await axios.delete(`/api/music/delete/${track}`);
-      console.log("removed track");
       setStarred(starred.filter((item) => item !== track));
+      setActive(-1);
     } else {
+      setActive(index);
       await axios.post(`/api/music/add/${track}`);
-      console.log("added track");
       setStarred((prevSelectedItems) => [...prevSelectedItems, track]);
+      setActive(-1);
     }
   };
 
@@ -59,7 +63,11 @@ export const TopTracks = (props) => {
 
                   <FontAwesomeIcon
                     icon={faStar}
-                    className={styles.faStar}
+                    className={
+                      active !== index
+                        ? `${styles.faStar} animate__animated animate__fadeIn`
+                        : `${styles.faStar} `
+                    }
                     onClick={(e) =>
                       e.stopPropagation() || clickStar(index, track[1])
                     }

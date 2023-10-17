@@ -107,7 +107,6 @@ export const starVideo = async (req, res, next) => {
 };
 
 export const deleteVideo = async (req, res, next) => {
-  console.log(req.params);
   try {
     const videos = await Starred.find({ user: req.user.id });
     if (videos[0].trackId.includes(req.params.video)) {
