@@ -3,18 +3,9 @@ const { Schema } = mongoose;
 
 const starredSchema = new Schema(
   {
-    video: {
-      type: String,
-      required: false,
-      active: false,
-    },
-    artist: {
-      type: String,
-      required: false,
-      active: false,
-    },
-    song: {
-      type: String,
+    trackId: {
+      type: Array,
+      default: [],
       required: false,
       active: false,
     },

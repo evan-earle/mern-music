@@ -5,21 +5,27 @@ import { faStar } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 
 export const TopTracks = (props) => {
-  const artist = props.artist;
   const [starred, setStarred] = useState([]);
 
-  const clickStar = (index) => {
-    if (starred.includes(index)) {
-      setStarred(starred.filter((item) => item !== index));
-    } else {
-      setStarred((prevSelectedItems) => [...prevSelectedItems, index]);
-    }
-    console.log(starred);
+  const clickStar = async (index, track) => {
+    const starredVideos = await axios.post(`/api/music/add/${track}`);
+    console.log(starredVideos);
+
+    // const deleteVideos = await axios.post(`/api/music/add/${track}`);
+    // console.log(deleteVideos);
+    // if (starred.includes(index)) {
+    //   setStarred(starred.filter((item) => item !== index));
+    // } else {
+    //   setStarred((prevSelectedItems) => [...prevSelectedItems, index]);
+    // }
+    // console.log(starred);
   };
 
   const getVideo = async (song) => {
+    const artist = props.artist;
     try {
       const getVideo = await axios.get(`/api/music/video/${artist} ${song}`);
+      console.log(getVideo);
       const videoId = getVideo.data.items[0].id.videoId;
       props.video(videoId);
     } catch (err) {
@@ -35,13 +41,17 @@ export const TopTracks = (props) => {
           <div className={styles.topTracksList}>
             <ul>
               {props.topTracks.map((track, index) => (
-                <li key={index} onClick={() => getVideo(track)}>
-                  {track.length > 30 ? track.substring(0, 30) + "..." : track}
+                <li key={index} onClick={() => getVideo(track[0])}>
+                  {track[0].length > 30
+                    ? track[0].substring(0, 30) + "..."
+                    : track[0]}
 
                   <FontAwesomeIcon
                     icon={faStar}
                     className={styles.faStar}
-                    onClick={() => clickStar(index)}
+                    onClick={(e) =>
+                      e.stopPropagation() || clickStar(index, track[1])
+                    }
                     style={{
                       color: starred.includes(index) ? "#ffbf00" : "white",
                     }}

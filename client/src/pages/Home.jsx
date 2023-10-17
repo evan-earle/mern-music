@@ -41,8 +41,12 @@ export const Home = () => {
       const tags = artistTags.join(" / ");
       setTags(tags);
 
-      const topTracksArray = data.data[2].body.tracks;
-      const topTracks = topTracksArray.map((track) => track.name).slice(0, 7);
+      const topTracksArray = data.data[1].body.tracks;
+
+      const topTracks = topTracksArray
+        .map((track) => [track.name, track.id])
+        .slice(0, 7);
+      console.log(topTracks);
       setTopTracks(topTracks);
     } catch (err) {
       toast.error("Artist not found");

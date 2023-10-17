@@ -45,8 +45,8 @@ export const getArtist = async (req, res, next) => {
 
     const response = await Promise.all([
       spotifyApi.getArtist(artistId),
-      spotifyApi.getArtistRelatedArtists(artistId),
       spotifyApi.getArtistTopTracks(artistId, "CA"),
+      spotifyApi.getArtistRelatedArtists(artistId),
     ]);
 
     const data = response;
@@ -61,7 +61,7 @@ export const getVideo = async (req, res, next) => {
 
   try {
     const response = await axios.get(
-      `https://www.googleapis.com/youtube/v3/search?key=${process.env.YOUTUBE_API_KEY}&type=video&part=snippet&q=${video}`
+      `https://www.googleapis.com/youtube/v3/search?key=${process.env.YOUTUBE_API_KEY}&maxResults=1&type=video&part=snippet&q=${video}`
     );
 
     const data = response.data;
@@ -72,15 +72,25 @@ export const getVideo = async (req, res, next) => {
 };
 
 export const starVideo = async (req, res, next) => {
-  console.log(req.user);
   try {
-    const addVideo = await Starred.findOneAndUpdate(
-      { user: req.user.id },
-      {
-        video: req.params.video,
-      }
-    );
-    return res.status(200).json(addVideo);
+    const videos = await Starred.find({ user: req.user.id });
+    if (!videos.length) {
+      await Starred.create({
+        trackId: req.params.video,
+        user: req.user.id,
+      });
+    } else if (videos[0].trackId.includes(req.params.video)) {
+    } else {
+      await Starred.findOneAndUpdate(
+        { user: req.user.id },
+        {
+          $push: {
+            trackId: req.params.video,
+          },
+        }
+      );
+    }
+    return res.status(200).json(videos);
   } catch (err) {
     return next(err);
   }
@@ -88,6 +98,10 @@ export const starVideo = async (req, res, next) => {
 
 export const deleteVideo = async (req, res, next) => {
   try {
+    const videos = await Starred.find({ user: req.user.id });
+    if (videos[0].trackId.includes(req.params.video)) {
+      console.log("delete this");
+    }
     return res.status(200).json(data);
   } catch (err) {
     return next(err);

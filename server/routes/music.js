@@ -14,6 +14,6 @@ router.get("/", getProfile);
 router.get("/video/:video", getVideo);
 router.get("/artist/:artist", getArtist);
 router.post("/add/:video", starVideo);
-router.delete("/delete", deleteVideo);
+router.delete("/delete:/video", deleteVideo);
 
 export default router;
