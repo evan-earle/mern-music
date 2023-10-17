@@ -71,6 +71,16 @@ export const getVideo = async (req, res, next) => {
   }
 };
 
+export const getStarred = async (req, res, next) => {
+  try {
+    const data = await Starred.find({ user: req.user.id });
+
+    return res.status(200).json(data);
+  } catch (err) {
+    return next(err);
+  }
+};
+
 export const starVideo = async (req, res, next) => {
   try {
     const videos = await Starred.find({ user: req.user.id });
@@ -97,12 +107,20 @@ export const starVideo = async (req, res, next) => {
 };
 
 export const deleteVideo = async (req, res, next) => {
+  console.log(req.params);
   try {
     const videos = await Starred.find({ user: req.user.id });
     if (videos[0].trackId.includes(req.params.video)) {
-      console.log("delete this");
+      await Starred.findOneAndUpdate(
+        { user: req.user.id },
+        {
+          $pull: {
+            trackId: req.params.video,
+          },
+        }
+      );
     }
-    return res.status(200).json(data);
+    return res.status(200).json(videos);
   } catch (err) {
     return next(err);
   }

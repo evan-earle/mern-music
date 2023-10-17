@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./TopTracks.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
@@ -7,31 +7,42 @@ import axios from "axios";
 export const TopTracks = (props) => {
   const [starred, setStarred] = useState([]);
 
-  const clickStar = async (index, track) => {
-    const starredVideos = await axios.post(`/api/music/add/${track}`);
-    console.log(starredVideos);
+  const getStarred = async () => {
+    try {
+      const starredVideos = await axios.get(`/api/music/starred`);
+      setStarred(starredVideos.data[0].trackId);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
-    // const deleteVideos = await axios.post(`/api/music/add/${track}`);
-    // console.log(deleteVideos);
-    // if (starred.includes(index)) {
-    //   setStarred(starred.filter((item) => item !== index));
-    // } else {
-    //   setStarred((prevSelectedItems) => [...prevSelectedItems, index]);
-    // }
-    // console.log(starred);
+  const clickStar = async (index, track) => {
+    console.log(starred);
+    if (starred.includes(track)) {
+      await axios.delete(`/api/music/delete/${track}`);
+      console.log("removed track");
+      setStarred(starred.filter((item) => item !== track));
+    } else {
+      await axios.post(`/api/music/add/${track}`);
+      console.log("added track");
+      setStarred((prevSelectedItems) => [...prevSelectedItems, track]);
+    }
   };
 
   const getVideo = async (song) => {
     const artist = props.artist;
     try {
       const getVideo = await axios.get(`/api/music/video/${artist} ${song}`);
-      console.log(getVideo);
       const videoId = getVideo.data.items[0].id.videoId;
       props.video(videoId);
     } catch (err) {
       console.log(err);
     }
   };
+
+  useEffect(() => {
+    getStarred();
+  }, [props]);
 
   return (
     <div className={styles.container}>
@@ -53,7 +64,7 @@ export const TopTracks = (props) => {
                       e.stopPropagation() || clickStar(index, track[1])
                     }
                     style={{
-                      color: starred.includes(index) ? "#ffbf00" : "white",
+                      color: starred.includes(track[1]) ? "#ffbf00" : "white",
                     }}
                   />
                 </li>

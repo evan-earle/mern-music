@@ -46,7 +46,7 @@ export const Home = () => {
       const topTracks = topTracksArray
         .map((track) => [track.name, track.id])
         .slice(0, 7);
-      console.log(topTracks);
+
       setTopTracks(topTracks);
     } catch (err) {
       toast.error("Artist not found");
