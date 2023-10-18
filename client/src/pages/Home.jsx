@@ -4,6 +4,7 @@ import { Youtube } from "../components/youtube/Youtube";
 import { TopTracks } from "../components/music/TopTracks";
 import { Albums } from "../components/music/Albums";
 import { RelatedArtists } from "../components/music/RelatedArtists";
+import { MainTracks } from "../components/music/MainTracks";
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import axios from "axios";
@@ -68,6 +69,7 @@ export const Home = () => {
         <Youtube search={search} />
       </div>
       <div className={styles.albumsRelated}>
+        <MainTracks />
         <Albums />
         <RelatedArtists />
       </div>

@@ -1,10 +1,9 @@
 .container {
-  width: 30%;
+  width: 35%;
   height: 20rem;
-  padding: 0 1rem;
 }
 
-.albumsTitle {
+.mainTracksTitle {
   display: flex;
   justify-content: center;
   width: 100%;
