@@ -2,6 +2,8 @@ import { Navbar } from "../components/nav/Navbar";
 import { Artist } from "../components/artist/Artist";
 import { Youtube } from "../components/youtube/Youtube";
 import { TopTracks } from "../components/music/TopTracks";
+import { Albums } from "../components/music/Albums";
+import { RelatedArtists } from "../components/music/RelatedArtists";
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import axios from "axios";
@@ -64,6 +66,10 @@ export const Home = () => {
         <Artist artist={artist} artistPhoto={artistPhoto} tags={tags} />
         <TopTracks artist={artist} topTracks={topTracks} video={setSearch} />
         <Youtube search={search} />
+      </div>
+      <div className={styles.albumsRelated}>
+        <Albums />
+        <RelatedArtists />
       </div>
     </div>
   );

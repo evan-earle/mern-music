@@ -19,12 +19,9 @@ export const TopTracks = (props) => {
   };
 
   const clickStar = async (index, track) => {
-    console.log(index);
     if (starred.includes(track)) {
-      setActive(index);
       await axios.delete(`/api/music/delete/${track}`);
       setStarred(starred.filter((item) => item !== track));
-      setActive(-1);
     } else {
       setActive(index);
       await axios.post(`/api/music/add/${track}`);

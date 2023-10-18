@@ -1,0 +1,15 @@
+.container {
+  width: 35%;
+  height: 20rem;
+}
+
+.relatedAristsTitle {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  border-bottom: 1px solid black;
+  padding: 0.5rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  background-color: #1c1c25;
+}

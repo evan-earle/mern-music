@@ -4,3 +4,10 @@
   padding: 1rem;
   width: 100%;
 }
+
+.albumsRelated {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  width: 100%;
+}
