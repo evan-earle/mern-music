@@ -5,9 +5,15 @@
   width: 100%;
 }
 
-.albumsRelated {
+.secondRow {
   display: flex;
   justify-content: space-between;
   padding: 0 1rem;
   width: 100%;
+}
+
+.albumsRelated {
+  display: flex;
+  flex-direction: column;
+  width: 67%;
 }

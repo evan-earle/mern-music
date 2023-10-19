@@ -2,7 +2,7 @@ import { Navbar } from "../components/nav/Navbar";
 import { Artist } from "../components/artist/Artist";
 import { Youtube } from "../components/youtube/Youtube";
 import { TopTracks } from "../components/music/TopTracks";
-import { Albums } from "../components/music/Albums";
+import { Albums } from "../components/music/albums/Albums";
 import { RelatedArtists } from "../components/music/RelatedArtists";
 import { MainTracks } from "../components/music/MainTracks";
 import { useState, useEffect } from "react";
@@ -16,6 +16,7 @@ export const Home = () => {
   const [topTracks, setTopTracks] = useState("");
   const [artistPhoto, setArtistPhoto] = useState("");
   const [tags, setTags] = useState("");
+  const [albums, setAlbums] = useState("");
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -48,11 +49,20 @@ export const Home = () => {
       setTags(tags);
 
       const topTracksArray = data.data[1].body.tracks;
-
       const topTracks = topTracksArray
         .map((track) => [track.name, track.id])
         .slice(0, 7);
       setTopTracks(topTracks);
+
+      const albumArray = data.data[3].body.items;
+      const albums = albumArray.map((album) => [
+        album.album_type.charAt(0).toUpperCase() + album.album_type.slice(1),
+        album.name,
+        album.release_date.slice(0, 4),
+        album.images[0].url,
+      ]);
+      setAlbums(albums);
+
       setLoading(false);
     } catch (err) {
       toast.error("Artist not found");
@@ -87,10 +97,12 @@ export const Home = () => {
             />
             <Youtube search={search} />
           </div>
-          <div className={styles.albumsRelated}>
+          <div className={styles.secondRow}>
             <MainTracks />
-            <Albums artist={artist} video={setSearch} />
-            <RelatedArtists />
+            <div className={styles.albumsRelated}>
+              <Albums artist={artist} video={setSearch} albums={albums} />
+              <RelatedArtists />
+            </div>
           </div>
         </div>
       )}

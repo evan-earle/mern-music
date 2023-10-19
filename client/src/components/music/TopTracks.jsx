@@ -55,7 +55,7 @@ export const TopTracks = (props) => {
               {props.topTracks.map((track, index) => (
                 <li key={index} onClick={() => getVideo(track[0])}>
                   {track[0].length > 30
-                    ? track[0].substring(0, 30) + "..."
+                    ? track[0].substring(0, 35) + "..."
                     : track[0]}
 
                   <FontAwesomeIcon

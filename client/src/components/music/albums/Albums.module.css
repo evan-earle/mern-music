@@ -1,7 +1,6 @@
 .container {
-  width: 30%;
-  height: 20rem;
-  padding: 0 1rem;
+  width: 100%;
+  padding: 0 0.5rem;
 }
 
 .albumsTitle {
@@ -13,4 +12,13 @@
   font-size: 1.25rem;
   font-weight: 600;
   background-color: #1c1c25;
+}
+
+.albumsList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  width: 100%;
 }
