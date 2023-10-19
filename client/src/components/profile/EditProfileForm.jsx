@@ -71,7 +71,7 @@ export const EditProfileForm = () => {
                 type="text"
                 name="username"
                 required
-                value={user.username}
+                placeholder={user.username}
                 onChange={updateUserInfo}
               />
             </div>
