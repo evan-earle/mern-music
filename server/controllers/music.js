@@ -47,7 +47,7 @@ export const getArtist = async (req, res, next) => {
       spotifyApi.getArtist(artistId),
       spotifyApi.getArtistTopTracks(artistId, "CA"),
       spotifyApi.getArtistRelatedArtists(artistId),
-      spotifyApi.getArtistAlbums(artistId, { limit: 10 }),
+      spotifyApi.getArtistAlbums(artistId),
     ]);
 
     const data = response;

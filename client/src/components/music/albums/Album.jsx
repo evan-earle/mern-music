@@ -9,8 +9,8 @@ export const Album = (props) => {
       <div className={styles.albumDetails}>
         <div>
           <h3 className={styles.albumTitle}>
-            {props.name.length > 19
-              ? props.name.substring(0, 19) + "..."
+            {props.name.length > 25
+              ? props.name.substring(0, 25) + "..."
               : props.name}
           </h3>
         </div>
