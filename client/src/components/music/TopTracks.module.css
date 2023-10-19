@@ -43,6 +43,7 @@ li {
 
 li:hover {
   backdrop-filter: brightness(80%);
+  transition-duration: 0.25s;
 }
 
 .faStar:hover {

@@ -33,7 +33,6 @@ export const MainTracks = (props) => {
   };
 
   const clickStar = async (index, track) => {
-    console.log(track);
     if (starred.includes(track)) {
       await axios.delete(`/api/music/delete/${track}`);
       setStarred(starred.filter((item) => item !== track));
