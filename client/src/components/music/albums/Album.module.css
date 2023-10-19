@@ -1,5 +1,5 @@
 .container {
-  width: 19%;
+  width: 100%;
   height: 14.5rem;
   border-radius: 5px;
   display: flex;
@@ -7,7 +7,6 @@
   align-items: center;
   padding: 0.75rem;
   background-color: #1c1c25;
-  margin-bottom: 0.5rem;
   cursor: pointer;
 }
 
@@ -34,4 +33,8 @@
 .yearType > p {
   color: grey;
   font-size: 0.75rem;
+}
+
+.container:hover {
+  opacity: 0.5;
 }

@@ -48,7 +48,36 @@ export const getArtist = async (req, res, next) => {
       spotifyApi.getArtistTopTracks(artistId, "CA"),
       spotifyApi.getArtistRelatedArtists(artistId),
       spotifyApi.getArtistAlbums(artistId),
+      spotifyApi.getAlbumTracks("47jzrGCudVC17eem7BkxRt"),
     ]);
+
+    const data = response;
+    return res.status(200).json(data);
+  } catch (err) {
+    return next(err);
+  }
+};
+
+export const getAlbum = async (req, res, next) => {
+  const album = req.params.album;
+
+  const spotifyApi = new SpotifyWebApi({
+    clientId: `${process.env.SPOTIFY_CLIENT_ID}`,
+    clientSecret: `${process.env.SPOTIFY_CLIENT_SECRET}`,
+  });
+  const access = await spotifyApi.clientCredentialsGrant();
+
+  // console.log("The access token expires in " + access.body["expires_in"]);
+  // console.log("The access token is " + access.body["access_token"]);
+
+  // Save the access token so that it's used in future calls
+  spotifyApi.setAccessToken(access.body["access_token"]);
+
+  (err) => {
+    console.log("Something went wrong when retrieving an access token", err);
+  };
+  try {
+    const response = await Promise.all([spotifyApi.getAlbumTracks(album)]);
 
     const data = response;
     return res.status(200).json(data);

@@ -19,6 +19,8 @@ export const Home = () => {
   const [albums, setAlbums] = useState("");
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
+  const [mainTracks, setMainTracks] = useState("");
+  const [albumTitle, setAlbumTitle] = useState("");
 
   const getArtistfromDB = async () => {
     try {
@@ -60,6 +62,7 @@ export const Home = () => {
         album.name,
         album.release_date.slice(0, 4),
         album.images[0].url,
+        album.id,
       ]);
       setAlbums(albums);
 
@@ -98,9 +101,20 @@ export const Home = () => {
             <Youtube search={search} />
           </div>
           <div className={styles.secondRow}>
-            <MainTracks />
+            <MainTracks
+              mainTracks={mainTracks}
+              artist={artist}
+              video={setSearch}
+              albums={albums}
+              albumTitle={albumTitle}
+            />
             <div className={styles.albumsRelated}>
-              <Albums artist={artist} video={setSearch} albums={albums} />
+              <Albums
+                artist={artist}
+                albums={albums}
+                mainTracks={setMainTracks}
+                albumTitle={setAlbumTitle}
+              />
               <RelatedArtists />
             </div>
           </div>

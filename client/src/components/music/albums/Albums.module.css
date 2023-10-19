@@ -18,10 +18,9 @@
 }
 
 .albumsList {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(5, auto);
+  grid-gap: 0.5rem;
   margin: 0;
   padding: 0;
   width: 100%;
