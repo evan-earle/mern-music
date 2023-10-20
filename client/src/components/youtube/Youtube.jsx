@@ -14,9 +14,8 @@ export const Youtube = (props) => {
         <iframe
           title={props.search}
           width="100%"
-          height="315"
           src={`https://www.youtube.com/embed/${props.search}?autoplay=1`}
-          allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
+          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
         ></iframe>
       )}

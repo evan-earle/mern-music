@@ -80,46 +80,48 @@ export const Home = () => {
   return (
     <div>
       <Navbar search={getArtist} />
-      {loading ? (
-        <PulseLoader
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            marginTop: "3rem",
-          }}
-          color="#00000060"
-        />
-      ) : (
-        <div>
-          <div className={styles.profileVideo}>
-            <Artist artist={artist} artistPhoto={artistPhoto} tags={tags} />
-            <TopTracks
-              artist={artist}
-              topTracks={topTracks}
-              video={setSearch}
-            />
-            <Youtube search={search} />
-          </div>
-          <div className={styles.secondRow}>
-            <MainTracks
-              mainTracks={mainTracks}
-              artist={artist}
-              video={setSearch}
-              albums={albums}
-              albumTitle={albumTitle}
-            />
-            <div className={styles.albumsRelated}>
-              <Albums
+      <div className={styles.container}>
+        <Youtube search={search} />
+        {loading ? (
+          <PulseLoader
+            style={{
+              display: "flex",
+              justifyContent: "right",
+              marginTop: "3rem",
+            }}
+            color="#00000060"
+          />
+        ) : (
+          <div>
+            <div className={styles.profileVideo}>
+              <Artist artist={artist} artistPhoto={artistPhoto} tags={tags} />
+              <TopTracks
                 artist={artist}
-                albums={albums}
-                mainTracks={setMainTracks}
-                albumTitle={setAlbumTitle}
+                topTracks={topTracks}
+                video={setSearch}
               />
-              <RelatedArtists />
+            </div>
+            <div className={styles.secondRow}>
+              <MainTracks
+                mainTracks={mainTracks}
+                artist={artist}
+                video={setSearch}
+                albums={albums}
+                albumTitle={albumTitle}
+              />
+              <div className={styles.albumsRelated}>
+                <Albums
+                  artist={artist}
+                  albums={albums}
+                  mainTracks={setMainTracks}
+                  albumTitle={setAlbumTitle}
+                />
+                <RelatedArtists />
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };

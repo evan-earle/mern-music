@@ -1,9 +1,12 @@
 .container {
   width: 33%;
-  /* border: solid red 2px; */
 }
 
 .youtubeImage {
   height: 20rem;
   width: 100%;
+}
+
+iframe {
+  height: 20rem;
 }

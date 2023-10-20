@@ -1,14 +1,19 @@
+.container {
+  display: flex;
+  flex-direction: row-reverse;
+  padding: 1rem;
+}
+
 .profileVideo {
   display: flex;
-  justify-content: space-between;
-  padding: 1rem;
+
   width: 100%;
 }
 
 .secondRow {
   display: flex;
   justify-content: space-between;
-  padding: 0 1rem;
+  padding: 1rem 0;
   width: 100%;
 }
 

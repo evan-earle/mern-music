@@ -1,6 +1,7 @@
 .container {
-  width: 33%;
+  width: 50%;
   position: relative;
+  height: 20rem;
 }
 
 .artistTags {
