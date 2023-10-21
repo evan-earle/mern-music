@@ -82,17 +82,19 @@ export const Home = () => {
       <Navbar search={getArtist} />
       <div className={styles.container}>
         <Youtube search={search} />
+
         {loading ? (
           <PulseLoader
             style={{
               display: "flex",
-              justifyContent: "right",
+              justifyContent: "left",
               marginTop: "3rem",
+              marginRight: "20rem",
             }}
             color="#00000060"
           />
         ) : (
-          <div>
+          <>
             <div className={styles.profileVideo}>
               <Artist artist={artist} artistPhoto={artistPhoto} tags={tags} />
               <TopTracks
@@ -101,25 +103,27 @@ export const Home = () => {
                 video={setSearch}
               />
             </div>
-            <div className={styles.secondRow}>
-              <MainTracks
-                mainTracks={mainTracks}
-                artist={artist}
-                video={setSearch}
-                albums={albums}
-                albumTitle={albumTitle}
-              />
-              <div className={styles.albumsRelated}>
-                <Albums
+            <div className={styles.tracksAlbums}>
+              <div className={styles.secondRow}>
+                <MainTracks
+                  mainTracks={mainTracks}
                   artist={artist}
+                  video={setSearch}
                   albums={albums}
-                  mainTracks={setMainTracks}
-                  albumTitle={setAlbumTitle}
+                  albumTitle={albumTitle}
                 />
-                <RelatedArtists />
+                <div className={styles.albumsRelated}>
+                  <Albums
+                    artist={artist}
+                    albums={albums}
+                    mainTracks={setMainTracks}
+                    albumTitle={setAlbumTitle}
+                  />
+                  <RelatedArtists />
+                </div>
               </div>
             </div>
-          </div>
+          </>
         )}
       </div>
     </div>
