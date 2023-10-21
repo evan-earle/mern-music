@@ -4,13 +4,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import "animate.css";
-import PulseLoader from "react-spinners/PulseLoader";
 
 export const MainTracks = (props) => {
   const [starred, setStarred] = useState([]);
   const [active, setActive] = useState(-1);
-
-  console.log(props.albumTitle);
 
   const getStarred = async () => {
     try {
@@ -51,13 +48,13 @@ export const MainTracks = (props) => {
   return (
     <div className={styles.container}>
       <h2 className={styles.mainTracksTitle}>
-        {props.albumTitle ? props.albumTitle : "Main Tracks"}
+        {props.albumTitle ? props.albumTitle : "Click on an album"}
       </h2>
       {props.mainTracks && (
         <div className={styles.mainTracksList}>
           <ul>
             {props.mainTracks.map((track, index) => (
-              <li key={index} onClick={() => getVideo(track)}>
+              <li key={index} onClick={() => getVideo(track[0])}>
                 {track[0].length > 30
                   ? track[0].substring(0, 35) + "..."
                   : track[0]}

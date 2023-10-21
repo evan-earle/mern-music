@@ -3,7 +3,7 @@ import { Artist } from "../components/artist/Artist";
 import { Youtube } from "../components/youtube/Youtube";
 import { TopTracks } from "../components/music/TopTracks";
 import { Albums } from "../components/music/albums/Albums";
-import { RelatedArtists } from "../components/music/RelatedArtists";
+import { RelatedArtists } from "../components/music/related artists/RelatedArtists";
 import { MainTracks } from "../components/music/MainTracks";
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
@@ -21,6 +21,8 @@ export const Home = () => {
   const [loading, setLoading] = useState(false);
   const [mainTracks, setMainTracks] = useState("");
   const [albumTitle, setAlbumTitle] = useState("");
+  const [relatedArtists, setRelatedArtists] = useState("");
+  const [test, setTest] = useState("");
 
   const getArtistfromDB = async () => {
     try {
@@ -66,6 +68,13 @@ export const Home = () => {
       ]);
       setAlbums(albums);
 
+      const relatedArray = data.data[2].body.artists;
+      const related = relatedArray
+        .map((item) => [item.name, item.images[0].url, item.id])
+        .splice(0, 12);
+
+      setRelatedArtists(related);
+
       setLoading(false);
     } catch (err) {
       toast.error("Artist not found");
@@ -76,6 +85,10 @@ export const Home = () => {
   useEffect(() => {
     getArtistfromDB();
   }, []);
+
+  useEffect(() => {
+    test ? getArtist(test) : null;
+  }, [test]);
 
   return (
     <div>
@@ -112,6 +125,7 @@ export const Home = () => {
                   albums={albums}
                   albumTitle={albumTitle}
                 />
+
                 <div className={styles.albumsRelated}>
                   <Albums
                     artist={artist}
@@ -119,7 +133,11 @@ export const Home = () => {
                     mainTracks={setMainTracks}
                     albumTitle={setAlbumTitle}
                   />
-                  <RelatedArtists />
+
+                  <RelatedArtists
+                    relatedArtists={relatedArtists}
+                    test={setTest}
+                  />
                 </div>
               </div>
             </div>

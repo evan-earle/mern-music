@@ -4,8 +4,6 @@ import axios from "axios";
 export const Album = (props) => {
   const getAlbum = async (albumId) => {
     const data = await axios.get(`/api/music/album/${albumId}`);
-    console.log(data);
-
     const trackData = data.data[0].body.items;
     const tracklist = trackData.map((track) => [track.name, track.id]);
     props.mainTracks(tracklist);

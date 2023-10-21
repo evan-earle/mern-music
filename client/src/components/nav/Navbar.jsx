@@ -46,6 +46,7 @@ export const Navbar = ({ search }) => {
 
   const submitSearch = async (e) => {
     e.preventDefault();
+
     search(navSearch);
     try {
       await axios.put(`/api/users/lastSearch/${navSearch}`);
