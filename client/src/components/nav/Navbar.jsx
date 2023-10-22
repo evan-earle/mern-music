@@ -4,7 +4,11 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import styles from "./Navbar.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import {
+  faBars,
+  faMagnifyingGlass,
+  faStar,
+} from "@fortawesome/free-solid-svg-icons";
 import "animate.css";
 
 export const Navbar = ({ search }) => {

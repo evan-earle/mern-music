@@ -25,6 +25,7 @@ export const Home = () => {
   const [test, setTest] = useState("");
 
   const getArtistfromDB = async () => {
+    setLoading(true);
     try {
       const lastSearch = await axios.get(`/api/users/lastSearch`);
       console.log(lastSearch);

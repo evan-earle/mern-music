@@ -8,6 +8,7 @@ import "animate.css";
 export const MainTracks = (props) => {
   const [starred, setStarred] = useState([]);
   const [active, setActive] = useState(-1);
+  const [playlist, setPlaylist] = useState(false);
 
   const getStarred = async () => {
     try {
@@ -41,6 +42,10 @@ export const MainTracks = (props) => {
     }
   };
 
+  const getPlaylist = () => {
+    console.log("got it");
+  };
+
   useEffect(() => {
     getStarred();
   }, [props]);
@@ -49,6 +54,14 @@ export const MainTracks = (props) => {
     <div className={styles.container}>
       <h2 className={styles.mainTracksTitle}>
         {props.albumTitle ? props.albumTitle : "Click on an album"}
+        <FontAwesomeIcon
+          icon={faStar}
+          className={`${styles.faStar} animate__animated animate__fadeIn`}
+          onClick={() => getPlaylist()}
+          style={{
+            color: playlist ? "#ffbf00" : "white",
+          }}
+        />
       </h2>
       {props.mainTracks && (
         <div className={styles.mainTracksList}>

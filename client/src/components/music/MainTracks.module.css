@@ -1,11 +1,11 @@
 .container {
-  width: 33%;
+  width: 33.67%;
   height: 20rem;
 }
 
 .mainTracksTitle {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   width: 100%;
   border-bottom: 1px solid black;
   padding: 0.5rem;
