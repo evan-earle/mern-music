@@ -86,6 +86,33 @@ export const getAlbum = async (req, res, next) => {
   }
 };
 
+export const getStarredPlaylist = async (req, res, next) => {
+  const tracks = req.params.tracks;
+  const spotifyApi = new SpotifyWebApi({
+    clientId: `${process.env.SPOTIFY_CLIENT_ID}`,
+    clientSecret: `${process.env.SPOTIFY_CLIENT_SECRET}`,
+  });
+  const access = await spotifyApi.clientCredentialsGrant();
+
+  // console.log("The access token expires in " + access.body["expires_in"]);
+  // console.log("The access token is " + access.body["access_token"]);
+
+  // Save the access token so that it's used in future calls
+  spotifyApi.setAccessToken(access.body["access_token"]);
+
+  (err) => {
+    console.log("Something went wrong when retrieving an access token", err);
+  };
+  try {
+    const response = await Promise.all([spotifyApi.getTracks([tracks])]);
+
+    const data = response;
+    return res.status(200).json(data);
+  } catch (err) {
+    return next(err);
+  }
+};
+
 export const getVideo = async (req, res, next) => {
   const video = req.params.video;
 

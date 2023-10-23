@@ -13,7 +13,10 @@ export const MainTracks = (props) => {
   const getStarred = async () => {
     try {
       const starredVideos = await axios.get(`/api/music/starred`);
-      setStarred(starredVideos.data[0].trackId);
+
+      starredVideos === "[object Object]"
+        ? setStarred(starredVideos.data[0].trackId)
+        : null;
     } catch (err) {
       console.log(err);
     }
@@ -46,8 +49,10 @@ export const MainTracks = (props) => {
     setActivePlaylist(!activePlaylist);
     try {
       const starredVideos = await axios.get(`/api/music/starred`);
-
-      console.log(starredVideos.data[0].trackId);
+      const tracks = await axios.get(
+        `/api/music/starredPlaylist/${starredVideos.data[0].trackId}`
+      );
+      console.log(tracks);
     } catch (err) {
       console.log(err);
     }

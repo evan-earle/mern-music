@@ -12,7 +12,9 @@ export const TopTracks = (props) => {
   const getStarred = async () => {
     try {
       const starredVideos = await axios.get(`/api/music/starred`);
-      setStarred(starredVideos.data[0].trackId);
+      starredVideos === "[object Object]"
+        ? setStarred(starredVideos.data[0].trackId)
+        : null;
     } catch (err) {
       console.log(err);
     }
