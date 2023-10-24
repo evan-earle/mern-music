@@ -9,6 +9,7 @@ export const MainTracks = (props) => {
   const [starred, setStarred] = useState([]);
   const [active, setActive] = useState(-1);
   const [activePlaylist, setActivePlaylist] = useState(false);
+  const [playlist, setPlaylist] = useState("");
 
   const getStarred = async () => {
     try {
@@ -45,17 +46,12 @@ export const MainTracks = (props) => {
     }
   };
 
-  const getPlaylist = async () => {
+  const renderPlaylist = () => {
     setActivePlaylist(!activePlaylist);
-    try {
-      const starredVideos = await axios.get(`/api/music/starred`);
-      const tracks = await axios.get(
-        `/api/music/starredPlaylist/${starredVideos.data[0].trackId}`
-      );
-      console.log(tracks);
-    } catch (err) {
-      console.log(err);
-    }
+  };
+
+  const deleteTrack = () => {
+    console.log("delete this");
   };
 
   useEffect(() => {
@@ -69,13 +65,35 @@ export const MainTracks = (props) => {
         <FontAwesomeIcon
           icon={faStar}
           className={activePlaylist ? `animate__animated animate__fadeIn` : ``}
-          onClick={() => getPlaylist()}
+          onClick={() => renderPlaylist()}
           style={{
             color: activePlaylist ? "#ffbf00" : "white",
           }}
         />
       </h2>
-      {props.mainTracks && (
+      {props.mainTracks && activePlaylist && (
+        <div className={styles.mainTracksList}>
+          <ul>
+            {props.playlist.map((track, index) => (
+              <li key={index} onClick={() => getVideo(track)}>
+                {track.length > 30 ? track.substring(0, 35) + "..." : track}
+
+                <FontAwesomeIcon
+                  icon={faStar}
+                  className={
+                    !activePlaylist ? ` animate__animated animate__fadeIn` : ` `
+                  }
+                  onClick={() => deleteTrack()}
+                  style={{
+                    color: starred.includes(track[1]) ? "#ffbf00" : "white",
+                  }}
+                />
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+      {props.mainTracks && !activePlaylist && (
         <div className={styles.mainTracksList}>
           <ul>
             {props.mainTracks.map((track, index) => (

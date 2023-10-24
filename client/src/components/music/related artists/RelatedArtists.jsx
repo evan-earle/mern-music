@@ -4,7 +4,7 @@ import { useState } from "react";
 
 export const RelatedArtists = (props) => {
   const [artist, setArtist] = useState("");
-  props.test(artist);
+  props.related(artist);
 
   return (
     <div className={styles.container}>

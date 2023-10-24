@@ -22,7 +22,8 @@ export const Home = () => {
   const [mainTracks, setMainTracks] = useState("");
   const [albumTitle, setAlbumTitle] = useState("");
   const [relatedArtists, setRelatedArtists] = useState("");
-  const [test, setTest] = useState("");
+  const [related, setRelated] = useState("");
+  const [playlist, setPlaylist] = useState("");
 
   const getArtistfromDB = async () => {
     setLoading(true);
@@ -31,6 +32,21 @@ export const Home = () => {
       console.log(lastSearch);
       const artist = lastSearch.data.lastSearch;
       getArtist(artist);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const getPlaylist = async () => {
+    try {
+      const starredVideos = await axios.get(`/api/music/starred`);
+      const tracks = await axios.get(
+        `/api/music/starredPlaylist/${starredVideos.data[0].trackId}`
+      );
+      const videos = tracks.data[0].body.tracks;
+      const what = videos.map((track) => track.id);
+
+      setPlaylist(what);
     } catch (err) {
       console.log(err);
     }
@@ -88,8 +104,12 @@ export const Home = () => {
   }, []);
 
   useEffect(() => {
-    test ? getArtist(test) : null;
-  }, [test]);
+    related ? getArtist(related) : null;
+  }, [related]);
+
+  useEffect(() => {
+    getPlaylist();
+  }, []);
 
   return (
     <div>
@@ -125,6 +145,7 @@ export const Home = () => {
                   video={setSearch}
                   albums={albums}
                   albumTitle={albumTitle}
+                  playlist={playlist}
                 />
 
                 <div className={styles.albumsRelated}>
@@ -137,7 +158,7 @@ export const Home = () => {
 
                   <RelatedArtists
                     relatedArtists={relatedArtists}
-                    test={setTest}
+                    related={setRelated}
                   />
                 </div>
               </div>
