@@ -8,7 +8,7 @@ import "animate.css";
 export const MainTracks = (props) => {
   const [starred, setStarred] = useState([]);
   const [active, setActive] = useState(-1);
-  const [playlist, setPlaylist] = useState(false);
+  const [activePlaylist, setActivePlaylist] = useState(false);
 
   const getStarred = async () => {
     try {
@@ -42,8 +42,15 @@ export const MainTracks = (props) => {
     }
   };
 
-  const getPlaylist = () => {
-    console.log("got it");
+  const getPlaylist = async () => {
+    setActivePlaylist(!activePlaylist);
+    try {
+      const starredVideos = await axios.get(`/api/music/starred`);
+
+      console.log(starredVideos.data[0].trackId);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   useEffect(() => {
@@ -56,10 +63,10 @@ export const MainTracks = (props) => {
         {props.albumTitle ? props.albumTitle : "Click on an album"}
         <FontAwesomeIcon
           icon={faStar}
-          className={`${styles.faStar} animate__animated animate__fadeIn`}
+          className={activePlaylist ? `animate__animated animate__fadeIn` : ``}
           onClick={() => getPlaylist()}
           style={{
-            color: playlist ? "#ffbf00" : "white",
+            color: activePlaylist ? "#ffbf00" : "white",
           }}
         />
       </h2>
@@ -76,8 +83,8 @@ export const MainTracks = (props) => {
                   icon={faStar}
                   className={
                     active !== index
-                      ? `${styles.faStar} animate__animated animate__fadeIn`
-                      : `${styles.faStar} `
+                      ? ` animate__animated animate__fadeIn`
+                      : ` `
                   }
                   onClick={(e) =>
                     e.stopPropagation() || clickStar(index, track[1])
