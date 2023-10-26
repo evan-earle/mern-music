@@ -131,7 +131,6 @@ export const getVideo = async (req, res, next) => {
 export const getStarred = async (req, res, next) => {
   try {
     const data = await Starred.find({ user: req.user.id });
-
     return res.status(200).json(data);
   } catch (err) {
     return next(err);

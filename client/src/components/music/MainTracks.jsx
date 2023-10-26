@@ -9,15 +9,14 @@ export const MainTracks = (props) => {
   const [starred, setStarred] = useState([]);
   const [active, setActive] = useState(-1);
   const [activePlaylist, setActivePlaylist] = useState(false);
-  const [playlist, setPlaylist] = useState("");
+  // const [playlist, setPlaylist] = useState("");
 
   const getStarred = async () => {
     try {
       const starredVideos = await axios.get(`/api/music/starred`);
-
-      starredVideos === "[object Object]"
-        ? setStarred(starredVideos.data[0].trackId)
-        : null;
+      starredVideos.data.length === 0
+        ? null
+        : setStarred(starredVideos.data[0].trackId);
     } catch (err) {
       console.log(err);
     }
@@ -50,6 +49,10 @@ export const MainTracks = (props) => {
     setActivePlaylist(!activePlaylist);
   };
 
+  const closePlaylist = () => {
+    setActivePlaylist(false);
+  };
+
   const deleteTrack = () => {
     console.log("delete this");
   };
@@ -58,10 +61,18 @@ export const MainTracks = (props) => {
     getStarred();
   }, [props]);
 
+  useEffect(() => {
+    closePlaylist();
+  }, [props.mainTracks]);
+
   return (
     <div className={styles.container}>
       <h2 className={styles.mainTracksTitle}>
-        {props.albumTitle ? props.albumTitle : "Click on an album"}
+        {activePlaylist
+          ? "Starred Playlist"
+          : props.albumTitle
+          ? props.albumTitle
+          : "Click on an album"}
         <FontAwesomeIcon
           icon={faStar}
           className={activePlaylist ? `animate__animated animate__fadeIn` : ``}
@@ -71,10 +82,11 @@ export const MainTracks = (props) => {
           }}
         />
       </h2>
-      {props.mainTracks && activePlaylist && (
+
+      {activePlaylist && (
         <div className={styles.mainTracksList}>
           <ul>
-            {props.playlist.map((track, index) => (
+            {starred.map((track, index) => (
               <li key={index} onClick={() => getVideo(track)}>
                 {track.length > 30 ? track.substring(0, 35) + "..." : track}
 
@@ -83,9 +95,9 @@ export const MainTracks = (props) => {
                   className={
                     !activePlaylist ? ` animate__animated animate__fadeIn` : ` `
                   }
-                  onClick={() => deleteTrack()}
+                  onClick={(e) => e.stopPropagation() || deleteTrack()}
                   style={{
-                    color: starred.includes(track[1]) ? "#ffbf00" : "white",
+                    color: starred.includes(track) ? "#ffbf00" : "white",
                   }}
                 />
               </li>
@@ -106,8 +118,8 @@ export const MainTracks = (props) => {
                   icon={faStar}
                   className={
                     active !== index
-                      ? ` animate__animated animate__fadeIn`
-                      : ` `
+                      ? `${styles.faStar} animate__animated animate__fadeIn`
+                      : `${styles.faStar} `
                   }
                   onClick={(e) =>
                     e.stopPropagation() || clickStar(index, track[1])
@@ -124,3 +136,57 @@ export const MainTracks = (props) => {
     </div>
   );
 };
+
+//       {props.playlist && activePlaylist && (
+//         <div className={styles.mainTracksList}>
+//           <ul>
+//             {props.playlist.map((track, index) => (
+//               <li key={index} onClick={() => getVideo(track)}>
+//                 {track.length > 30 ? track.substring(0, 35) + "..." : track}
+
+//                 <FontAwesomeIcon
+//                   icon={faStar}
+//                   className={
+//                     !activePlaylist ? ` animate__animated animate__fadeIn` : ` `
+//                   }
+//                   onClick={() => deleteTrack()}
+//                   style={{
+//                     color: starred.includes(track[1]) ? "#ffbf00" : "white",
+//                   }}
+//                 />
+//               </li>
+//             ))}
+//           </ul>
+//         </div>
+//       )}
+//       {props.mainTracks && !activePlaylist && (
+//         <div className={styles.mainTracksList}>
+//           <ul>
+//             {props.mainTracks.map((track, index) => (
+//               <li key={index} onClick={() => getVideo(track[0])}>
+//                 {track[0].length > 30
+//                   ? track[0].substring(0, 35) + "..."
+//                   : track[0]}
+
+//                 <FontAwesomeIcon
+//                   icon={faStar}
+//                   className={
+//                     active !== index
+//                       ? ` animate__animated animate__fadeIn`
+//                       : ` `
+//                   }
+//                   onClick={(e) =>
+//                     e.stopPropagation() || clickStar(index, track[1])
+//                   }
+//                   style={{
+//                     color: starred.includes(track[1]) ? "#ffbf00" : "white",
+//                   }}
+//                 />
+//               </li>
+//             ))}
+//           </ul>
+//         </div>
+//       )}
+//     </div>
+//   );
+// };

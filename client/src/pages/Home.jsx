@@ -29,7 +29,7 @@ export const Home = () => {
     setLoading(true);
     try {
       const lastSearch = await axios.get(`/api/users/lastSearch`);
-      console.log(lastSearch);
+
       const artist = lastSearch.data.lastSearch;
       getArtist(artist);
     } catch (err) {
@@ -37,26 +37,25 @@ export const Home = () => {
     }
   };
 
-  const getPlaylist = async () => {
-    try {
-      const starredVideos = await axios.get(`/api/music/starred`);
-      const tracks = await axios.get(
-        `/api/music/starredPlaylist/${starredVideos.data[0].trackId}`
-      );
-      const videos = tracks.data[0].body.tracks;
-      const what = videos.map((track) => track.id);
+  // const getPlaylist = async () => {
+  //   try {
+  //     const starredVideos = await axios.get(`/api/music/starred`);
+  //     const tracks = await axios.get(
+  //       `/api/music/starredPlaylist/${starredVideos.data[0].trackId}`
+  //     );
+  //     const videos = tracks.data[0].body.tracks;
+  //     const videoId = videos.map((track) => track.id);
 
-      setPlaylist(what);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  //     setPlaylist(videoId);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
 
   const getArtist = async (artist) => {
     setLoading(true);
     try {
       const data = await axios.get(`/api/music/artist/${artist}`);
-      console.log(data);
 
       setArtist(data.data[0].body.name);
 
@@ -107,9 +106,9 @@ export const Home = () => {
     related ? getArtist(related) : null;
   }, [related]);
 
-  useEffect(() => {
-    getPlaylist();
-  }, []);
+  // useEffect(() => {
+  //   getPlaylist();
+  // }, []);
 
   return (
     <div>
@@ -143,9 +142,8 @@ export const Home = () => {
                   mainTracks={mainTracks}
                   artist={artist}
                   video={setSearch}
-                  albums={albums}
                   albumTitle={albumTitle}
-                  playlist={playlist}
+                  // playlist={playlist}
                 />
 
                 <div className={styles.albumsRelated}>
