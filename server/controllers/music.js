@@ -88,6 +88,7 @@ export const getAlbum = async (req, res, next) => {
 
 export const getStarredPlaylist = async (req, res, next) => {
   const tracks = req.params.tracks;
+  console.log(tracks);
   const spotifyApi = new SpotifyWebApi({
     clientId: `${process.env.SPOTIFY_CLIENT_ID}`,
     clientSecret: `${process.env.SPOTIFY_CLIENT_SECRET}`,

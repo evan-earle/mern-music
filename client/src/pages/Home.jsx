@@ -23,7 +23,6 @@ export const Home = () => {
   const [albumTitle, setAlbumTitle] = useState("");
   const [relatedArtists, setRelatedArtists] = useState("");
   const [related, setRelated] = useState("");
-  const [playlist, setPlaylist] = useState("");
 
   const getArtistfromDB = async () => {
     setLoading(true);
@@ -36,21 +35,6 @@ export const Home = () => {
       console.log(err);
     }
   };
-
-  // const getPlaylist = async () => {
-  //   try {
-  //     const starredVideos = await axios.get(`/api/music/starred`);
-  //     const tracks = await axios.get(
-  //       `/api/music/starredPlaylist/${starredVideos.data[0].trackId}`
-  //     );
-  //     const videos = tracks.data[0].body.tracks;
-  //     const videoId = videos.map((track) => track.id);
-
-  //     setPlaylist(videoId);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
 
   const getArtist = async (artist) => {
     setLoading(true);
@@ -106,10 +90,6 @@ export const Home = () => {
     related ? getArtist(related) : null;
   }, [related]);
 
-  // useEffect(() => {
-  //   getPlaylist();
-  // }, []);
-
   return (
     <div>
       <Navbar search={getArtist} />
@@ -143,7 +123,6 @@ export const Home = () => {
                   artist={artist}
                   video={setSearch}
                   albumTitle={albumTitle}
-                  // playlist={playlist}
                 />
 
                 <div className={styles.albumsRelated}>
