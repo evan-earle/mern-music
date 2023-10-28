@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import styles from "./MainTracks.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { Playlist } from "./Playlist";
 import axios from "axios";
 import "animate.css";
 
@@ -46,11 +47,10 @@ export const MainTracks = (props) => {
   };
 
   const getVideo = async (song) => {
+    const artist = props.artist;
+
     try {
-      const getVideo = await axios.get(
-        `/api/music/video/${props.artist} ${song}`
-      );
-      console.log(getVideo);
+      const getVideo = await axios.get(`/api/music/video/ ${artist} ${song}`);
       const videoId = getVideo.data.items[0].id.videoId;
       props.video(videoId);
     } catch (err) {
@@ -64,10 +64,6 @@ export const MainTracks = (props) => {
 
   const closePlaylist = () => {
     setActivePlaylist(false);
-  };
-
-  const deleteTrack = () => {
-    console.log("delete this");
   };
 
   useEffect(() => {
@@ -96,30 +92,7 @@ export const MainTracks = (props) => {
         />
       </h2>
 
-      {activePlaylist && starred && (
-        <div className={styles.mainTracksList}>
-          <ul>
-            {starred.map((track, index) => (
-              <li key={index} onClick={() => getVideo(track)}>
-                {track.length[1] > 30
-                  ? track[1].substring(0, 35) + "..."
-                  : track[1]}
-
-                <FontAwesomeIcon
-                  icon={faStar}
-                  className={
-                    !activePlaylist ? `animate__animated animate__fadeIn` : ``
-                  }
-                  onClick={(e) => e.stopPropagation() || deleteTrack()}
-                  style={{
-                    color: starred.includes(track) ? "#ffbf00" : "white",
-                  }}
-                />
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
+      {activePlaylist && <Playlist />}
       {props.mainTracks && !activePlaylist && (
         <div className={styles.mainTracksList}>
           <ul>

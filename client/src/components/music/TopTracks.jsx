@@ -11,10 +11,11 @@ export const TopTracks = (props) => {
 
   const getStarred = async () => {
     try {
-      const starredVideos = await axios.get(`/api/music/starred`);
-      starredVideos.data.length !== 0
-        ? setStarred(starredVideos.data[0].trackId)
-        : null;
+      const starredVideoIds = await axios.get(`/api/music/starred`);
+      if (starredVideoIds.data.length !== 0) {
+        const starredVideoIdsArray = starredVideoIds.data[0].trackId;
+        setStarred(starredVideoIdsArray);
+      }
     } catch (err) {
       console.log(err);
     }

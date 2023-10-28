@@ -123,6 +123,7 @@ export const Home = () => {
                   artist={artist}
                   video={setSearch}
                   albumTitle={albumTitle}
+                  toptracks={topTracks}
                 />
 
                 <div className={styles.albumsRelated}>
