@@ -1,7 +1,8 @@
 import User from "../models/User.js";
 import bcryptjs from "bcryptjs";
 import createError from "../utils/createError.js";
-import SpotifyWebApi from "spotify-web-api-node";
+
+import { v2 as cloudinary } from "cloudinary";
 
 export const getUserInfo = async (req, res, next) => {
   try {
@@ -72,7 +73,36 @@ export const getLastSearch = async (req, res, next) => {
 };
 
 export const upload = async (req, res, next) => {
+  cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
+  });
   try {
+    const fileStr = req.body.data;
+    const uploadedResponse = await cloudinary.uploader.upload(fileStr, {
+      upload_preset: "ml_default",
+    });
+    return res.status(200).json(uploadedResponse);
+  } catch (err) {
+    return next(err);
+  }
+};
+
+export const storePhoto = async (req, res, next) => {
+  try {
+    const data = await User.findByIdAndUpdate(req.user.id, {
+      image: req.body.photo,
+    }).select("image");
+    return res.status(200).json(data);
+  } catch (err) {
+    return next(err);
+  }
+};
+
+export const getPhoto = async (req, res, next) => {
+  try {
+    const data = await User.findById(req.user.id, {}).select("image");
     return res.status(200).json(data);
   } catch (err) {
     return next(err);
