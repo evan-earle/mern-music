@@ -70,3 +70,11 @@ export const getLastSearch = async (req, res, next) => {
     return next(err);
   }
 };
+
+export const upload = async (req, res, next) => {
+  try {
+    return res.status(200).json(data);
+  } catch (err) {
+    return next(err);
+  }
+};
