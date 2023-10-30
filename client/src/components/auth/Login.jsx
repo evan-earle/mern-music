@@ -20,7 +20,6 @@ export const Login = ({ authType }) => {
         password,
       });
       const firstLogin = await axios.get("/api/users/me");
-
       firstLogin.data.firstLogin === true ? navigate("/search") : navigate("/");
       toast.success("Signed in");
       await axios.put("/api/users/firstLogin");

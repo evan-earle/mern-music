@@ -25,11 +25,13 @@ export const TopTracks = (props) => {
     if (starred.includes(track)) {
       await axios.delete(`/api/music/delete/${track}`);
       setStarred(starred.filter((item) => item !== track));
+      props.song();
     } else {
       setActive(index);
       await axios.post(`/api/music/add/${track}`);
       setStarred((prevSelectedItems) => [...prevSelectedItems, track]);
       setActive(-1);
+      props.song();
     }
   };
 
@@ -57,7 +59,7 @@ export const TopTracks = (props) => {
             <ul>
               {props.topTracks.map((track, index) => (
                 <li key={index} onClick={() => getVideo(track[0])}>
-                  {track[0].length > 30
+                  {track[0].length > 35
                     ? track[0].substring(0, 35) + "..."
                     : track[0]}
 

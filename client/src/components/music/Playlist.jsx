@@ -6,7 +6,7 @@ import axios from "axios";
 import "animate.css";
 import PulseLoader from "react-spinners/PulseLoader";
 
-export const Playlist = (props) => {
+export const Playlist = ({ video, getMainTracks, getTopTracks, song }) => {
   const [starred, setStarred] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -26,7 +26,7 @@ export const Playlist = (props) => {
             track.name,
             track.artists[0].name,
           ]);
-          setStarred(starredVideoIdsArray);
+          setStarred(starredIds);
         }
       }
       setLoading(false);
@@ -35,16 +35,24 @@ export const Playlist = (props) => {
     }
   };
 
-  const deleteTrack = async () => {
-    console.log("delet this");
+  const deleteTrack = async (track) => {
+    try {
+      await axios.delete(`/api/music/delete/${track[0]}`);
+      setStarred(starred.filter((item) => item !== track));
+      getMainTracks();
+      getTopTracks();
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const getVideo = async (song) => {
-    const artist = props.artist;
     try {
-      const getVideo = await axios.get(`/api/music/video/ ${artist} ${song}`);
+      const getVideo = await axios.get(
+        `/api/music/video/${song[2]} ${song[1]}`
+      );
       const videoId = getVideo.data.items[0].id.videoId;
-      props.video(videoId);
+      video(videoId);
     } catch (err) {
       console.log(err);
     }
@@ -52,7 +60,7 @@ export const Playlist = (props) => {
 
   useEffect(() => {
     getStarred();
-  }, [props]);
+  }, [song]);
 
   return (
     <div className={styles.container}>
@@ -72,10 +80,12 @@ export const Playlist = (props) => {
             {starred.length > 0 &&
               starred.map((track, index) => (
                 <li key={index} onClick={() => getVideo(track)}>
-                  {track.length > 30 ? track.substring(0, 35) + "..." : track}
+                  {track[1].length > 45
+                    ? track[1].substring(0, 45) + "..."
+                    : track[1]}
                   <FontAwesomeIcon
                     icon={faStar}
-                    onClick={(e) => e.stopPropagation() || deleteTrack()}
+                    onClick={(e) => e.stopPropagation() || deleteTrack(track)}
                     style={{
                       color: "#ffbf00",
                     }}

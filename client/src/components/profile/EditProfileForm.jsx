@@ -30,7 +30,6 @@ export const EditProfileForm = () => {
 
   const updateProfile = async (e) => {
     e.preventDefault();
-
     try {
       const res = await axios.put("/api/users/me", user);
       toast.success("Profile updated");

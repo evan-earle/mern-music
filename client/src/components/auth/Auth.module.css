@@ -59,9 +59,9 @@ label {
     background-image: url(../../assets/clearDay.jpg);
     background-size: cover;
   }
-  img {
+  /* img {
     display: none;
-  }
+  } */
   .Auth-form {
     width: 25rem;
     border-radius: 8px 8px 8px 8px;

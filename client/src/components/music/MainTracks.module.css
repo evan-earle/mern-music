@@ -1,6 +1,7 @@
 .container {
   width: 33.67%;
-  height: 20rem;
+  height: 62rem;
+  overflow-y: auto;
 }
 
 .mainTracksTitle {
@@ -12,4 +13,10 @@
   font-size: 1.25rem;
   font-weight: 600;
   background-color: #1c1c25;
+}
+
+@media screen and (max-width: 1000px) {
+  .container {
+    width: 50%;
+  }
 }

@@ -27,3 +27,12 @@
   flex-direction: column;
   width: 67%;
 }
+
+@media screen and (max-width: 1000px) {
+  .profileVideo {
+    width: 100%;
+  }
+  .albumsRelated {
+    width: 50%;
+  }
+}

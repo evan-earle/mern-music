@@ -17,14 +17,29 @@ nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 15rem;
-  margin: 0 3rem 0 4rem;
+  width: 30%;
+  margin: 0 3rem 0 8rem;
 }
 
-nav a {
+nav > a {
+  display: flex;
+  justify-content: center;
   text-decoration: none;
   color: white;
   cursor: pointer;
+  width: 20%;
+}
+
+.username {
+  width: 30%;
+  display: flex;
+  justify-content: center;
+}
+
+.profileImage {
+  height: 3.5rem;
+  width: 3.5rem;
+  border-radius: 50%;
 }
 
 .search-container {
@@ -44,7 +59,6 @@ input {
   background: #ffffff;
   border: 1px solid rgba(34, 36, 38, 0.15);
   color: rgba(0, 0, 0, 0.6);
-
   box-shadow: none;
   outline: none;
   font-weight: 800;

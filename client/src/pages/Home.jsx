@@ -23,12 +23,13 @@ export const Home = () => {
   const [albumTitle, setAlbumTitle] = useState("");
   const [relatedArtists, setRelatedArtists] = useState("");
   const [related, setRelated] = useState("");
+  const [track, setTrack] = useState("");
+  const [song, setSong] = useState("");
 
   const getArtistfromDB = async () => {
     setLoading(true);
     try {
       const lastSearch = await axios.get(`/api/users/lastSearch`);
-
       const artist = lastSearch.data.lastSearch;
       getArtist(artist);
     } catch (err) {
@@ -82,6 +83,14 @@ export const Home = () => {
     }
   };
 
+  const deleteTrack = () => {
+    setTrack(!track);
+  };
+
+  const addDeleteTrack = () => {
+    setSong(!song);
+  };
+
   useEffect(() => {
     getArtistfromDB();
   }, []);
@@ -114,6 +123,8 @@ export const Home = () => {
                 artist={artist}
                 topTracks={topTracks}
                 video={setSearch}
+                track={track}
+                song={addDeleteTrack}
               />
             </div>
             <div className={styles.tracksAlbums}>
@@ -124,6 +135,9 @@ export const Home = () => {
                   video={setSearch}
                   albumTitle={albumTitle}
                   toptracks={topTracks}
+                  top={deleteTrack}
+                  track={track}
+                  song={song}
                 />
 
                 <div className={styles.albumsRelated}>

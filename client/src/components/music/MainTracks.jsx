@@ -16,18 +16,7 @@ export const MainTracks = (props) => {
       const starredVideoIds = await axios.get(`/api/music/starred`);
       if (starredVideoIds.data.length !== 0) {
         const starredVideoIdsArray = starredVideoIds.data[0].trackId;
-        if (starredVideoIdsArray.length !== 0) {
-          const starredVideos = await axios.get(
-            `/api/music/starredPlaylist/${starredVideoIdsArray}`
-          );
-          const starredTracks = starredVideos.data[0].body.tracks;
-          const starredIds = starredTracks.map((track) => [
-            track.id,
-            track.name,
-            track.artists[0].name,
-          ]);
-          setStarred(starredVideoIdsArray);
-        }
+        setStarred(starredVideoIdsArray);
       }
     } catch (err) {
       console.log(err);
@@ -35,20 +24,23 @@ export const MainTracks = (props) => {
   };
 
   const clickStar = async (index, track) => {
-    if (starred.includes(track)) {
-      await axios.delete(`/api/music/delete/${track}`);
-      setStarred(starred.filter((item) => item !== track));
-    } else {
-      setActive(index);
-      await axios.post(`/api/music/add/${track}`);
-      setStarred((prevSelectedItems) => [...prevSelectedItems, track]);
-      setActive(-1);
+    try {
+      if (starred.includes(track)) {
+        await axios.delete(`/api/music/delete/${track}`);
+        setStarred(starred.filter((item) => item !== track));
+      } else {
+        setActive(index);
+        await axios.post(`/api/music/add/${track}`);
+        setStarred((prevSelectedItems) => [...prevSelectedItems, track]);
+        setActive(-1);
+      }
+    } catch (err) {
+      console.log(err);
     }
   };
 
   const getVideo = async (song) => {
     const artist = props.artist;
-
     try {
       const getVideo = await axios.get(`/api/music/video/ ${artist} ${song}`);
       const videoId = getVideo.data.items[0].id.videoId;
@@ -58,12 +50,20 @@ export const MainTracks = (props) => {
     }
   };
 
+  const passVideoId = (videoId) => {
+    props.video(videoId);
+  };
+
   const renderPlaylist = () => {
     setActivePlaylist(!activePlaylist);
   };
 
   const closePlaylist = () => {
     setActivePlaylist(false);
+  };
+
+  const getTopTracks = () => {
+    props.top();
   };
 
   useEffect(() => {
@@ -78,7 +78,7 @@ export const MainTracks = (props) => {
     <div className={styles.container}>
       <h2 className={styles.mainTracksTitle}>
         {activePlaylist
-          ? "Starred Playlist"
+          ? "Favourites"
           : props.albumTitle
           ? props.albumTitle
           : "Click on an album"}
@@ -92,16 +92,24 @@ export const MainTracks = (props) => {
         />
       </h2>
 
-      {activePlaylist && <Playlist />}
+      {activePlaylist && (
+        <Playlist
+          video={passVideoId}
+          getMainTracks={getStarred}
+          getTopTracks={getTopTracks}
+          track={props.track}
+          song={props.song}
+        />
+      )}
+
       {props.mainTracks && !activePlaylist && (
         <div className={styles.mainTracksList}>
           <ul>
             {props.mainTracks.map((track, index) => (
               <li key={index} onClick={() => getVideo(track[0])}>
-                {track[0].length > 30
-                  ? track[0].substring(0, 35) + "..."
+                {track[0].length > 45
+                  ? track[0].substring(0, 45) + "..."
                   : track[0]}
-
                 <FontAwesomeIcon
                   icon={faStar}
                   className={

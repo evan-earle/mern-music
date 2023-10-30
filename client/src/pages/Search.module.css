@@ -56,9 +56,9 @@ label {
     background-image: url(../assets/drizzleNight.jpg);
     background-size: cover;
   }
-  img {
+  /* img {
     display: none;
-  }
+  } */
   .Auth-form {
     width: 25rem;
     border-radius: 8px 8px 8px 8px;

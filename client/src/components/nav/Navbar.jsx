@@ -4,17 +4,14 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import styles from "./Navbar.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faBars,
-  faMagnifyingGlass,
-  faStar,
-} from "@fortawesome/free-solid-svg-icons";
+import { faBars, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import "animate.css";
 
 export const Navbar = ({ search }) => {
   const [user, setUser] = useState(null);
   const [navSearch, setNavSearch] = useState("");
   const [clicked, setClicked] = useState(false);
+  const [photo, setPhoto] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -26,6 +23,8 @@ export const Navbar = ({ search }) => {
     try {
       const { data } = await axios.get("/api/users/me");
       setUser(data);
+      const photo = await axios.get(`/api/users/getPhoto`);
+      setPhoto(photo.data.image);
     } catch (err) {
       console.log(err);
     }
@@ -50,7 +49,6 @@ export const Navbar = ({ search }) => {
 
   const submitSearch = async (e) => {
     e.preventDefault();
-
     search(navSearch);
     try {
       await axios.put(`/api/users/lastSearch/${navSearch}`);
@@ -88,11 +86,11 @@ export const Navbar = ({ search }) => {
             : ` ${styles.animate} animate__animated animate__fadeInUp`
         }
       >
-        <span>{user.username}</span>
-
+        <img className={styles.profileImage} src={photo} alt="profile-photo" />
+        <span className={styles.username}>{user.username}</span>
         {location.pathname === "/" ? (
           <Link to="/edit-profile">
-            <a>Edit Profile</a>
+            <a>Profile</a>
           </Link>
         ) : (
           <Link to="/">Home</Link>
