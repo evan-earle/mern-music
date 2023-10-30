@@ -8,9 +8,10 @@
 .Auth-form-container {
   display: flex;
   justify-content: center;
-  align-items: center;
-  width: 100vw;
-  height: 80vh;
+  height: 100vh;
+  background-image: url(../../assets/background1.jpg);
+  background-size: cover;
+  background-position: center;
 }
 
 img {
@@ -20,12 +21,13 @@ img {
 }
 
 .Auth-form {
+  margin-top: 8rem;
   width: 25rem;
   height: 22rem;
   box-shadow: rgb(0 0 0 / 16%) 1px 1px 10px;
   padding-top: 2rem;
   padding-bottom: 2rem;
-  border-radius: 0px 8px 8px 0px;
+  border-radius: 8px 8px 8px 8px;
   background-color: white;
 }
 
@@ -56,12 +58,10 @@ label {
 @media screen and (max-width: 1000px) {
   .Auth-form-container {
     height: 100vh;
-    background-image: url(../../assets/clearDay.jpg);
+    background-image: url(../../assets/background1.jpg);
     background-size: cover;
   }
-  /* img {
-    display: none;
-  } */
+
   .Auth-form {
     width: 25rem;
     border-radius: 8px 8px 8px 8px;

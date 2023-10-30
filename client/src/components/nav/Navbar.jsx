@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import styles from "./Navbar.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import blankUser from "../../assets/blankUser.jpg";
 import "animate.css";
 
 export const Navbar = ({ search }) => {
@@ -24,7 +25,7 @@ export const Navbar = ({ search }) => {
       const { data } = await axios.get("/api/users/me");
       setUser(data);
       const photo = await axios.get(`/api/users/getPhoto`);
-      setPhoto(photo.data.image);
+      !photo.data.image ? setPhoto(blankUser) : setPhoto(photo.data.image);
     } catch (err) {
       console.log(err);
     }

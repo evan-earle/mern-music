@@ -2,7 +2,6 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useState } from "react";
-import clearDay from "../../assets/backgrounds/clearDay.jpg";
 import "animate.css";
 import styles from "./Auth.module.css";
 
@@ -31,12 +30,6 @@ export const Login = ({ authType }) => {
 
   return (
     <div className={styles["Auth-form-container"]}>
-      <img
-        style={{ borderRadius: " 8px 0px 0px 8px" }}
-        src={clearDay}
-        alt="sunny"
-        className="animate__animated animate__fadeInRight"
-      />
       <form
         className={`${styles["Auth-form"]} animate__animated animate__fadeInLeft
         `}
