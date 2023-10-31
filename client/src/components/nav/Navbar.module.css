@@ -130,13 +130,9 @@ input:focus {
     margin: 0rem;
   }
 
-  .search-container {
-    display: none;
-  }
-
   header {
     justify-content: flex-end;
-    gap: 5%;
+    height: 8vh;
   }
 
   .animate {
@@ -156,7 +152,7 @@ input:focus {
   }
 
   .active {
-    top: 80px;
+    top: 0px;
     margin: 0;
     width: 100%;
     background-color: #272733;
