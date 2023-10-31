@@ -36,3 +36,23 @@
     width: 50%;
   }
 }
+
+@media screen and (max-width: 768px) {
+  .container {
+    padding: 0;
+  }
+  .profileVideo {
+    display: flex;
+    flex-direction: column;
+  }
+  .secondRow {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+  }
+  .albumsRelated {
+    width: 100%;
+    margin: 0;
+    padding-top: 0.5rem;
+  }
+}

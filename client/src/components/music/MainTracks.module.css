@@ -20,3 +20,26 @@
     width: 50%;
   }
 }
+
+@media screen and (max-width: 768px) {
+  .container {
+    width: 100%;
+    margin-top: 0.5rem;
+    height: 20rem;
+  }
+
+  .mainTracksList > ul {
+    overflow: auto;
+    height: 20rem;
+  }
+
+  .mainTracksTitle {
+    margin: 0;
+  }
+}
+
+@media screen and (max-width: 440px) {
+  li {
+    font-size: 1rem;
+  }
+}

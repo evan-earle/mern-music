@@ -2,7 +2,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 2rem%;
+  width: 20rem;
   margin: 2rem;
 }
 
@@ -41,7 +41,7 @@ label {
 
 @media screen and (max-width: 460px) {
   .Auth-form {
-    width: 18rem;
+    width: 15rem;
     height: 22rem;
   }
 }

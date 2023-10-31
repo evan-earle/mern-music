@@ -24,3 +24,16 @@ iframe {
     padding-bottom: 1rem;
   }
 }
+
+@media screen and (max-width: 768px) {
+  .container {
+    width: 100%;
+  }
+  .youtubeImage {
+    width: 100%;
+    padding-bottom: 0.5rem;
+  }
+  iframe {
+    padding-bottom: 0.5rem;
+  }
+}

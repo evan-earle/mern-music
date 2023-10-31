@@ -50,3 +50,10 @@ li:hover {
   color: #ffbf00;
   animation-duration: 1s;
 }
+
+@media screen and (max-width: 768px) {
+  .container {
+    width: 100%;
+    padding: 0;
+  }
+}
