@@ -1,5 +1,5 @@
-import blankVideo from "../../assets/blankVideo.jpg";
 import styles from "./Youtube.module.css";
+import blankVideo from "../../assets/blankVideo.jpg";
 
 export const Youtube = (props) => {
   return (
