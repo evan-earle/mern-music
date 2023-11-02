@@ -71,7 +71,7 @@ label {
 @media screen and (max-width: 460px) {
   .Auth-form {
     width: 18rem;
-    height: 22rem;
+    height: 25rem;
     box-shadow: rgb(0 0 0 / 60%) 5px 5px 10px;
     padding-top: 2rem;
     padding-bottom: 2rem;
