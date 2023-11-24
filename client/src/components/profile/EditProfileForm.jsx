@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import toast from "react-hot-toast";
+import axios from "axios";
 import styles from "./EditProfileForm.module.css";
 import PulseLoader from "react-spinners/PulseLoader";
 
