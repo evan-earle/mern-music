@@ -75,7 +75,6 @@ export const logout = (req, res) => {
 
 export const isLoggedIn = (req, res) => {
   const token = req.cookies.access_token;
-
   if (!token) {
     return res.json(false);
   }
