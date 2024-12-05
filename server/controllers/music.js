@@ -41,12 +41,13 @@ export const getArtist = async (req, res, next) => {
   };
   try {
     const searchArtist = await spotifyApi.searchArtists(artist);
+
     const artistId = searchArtist.body.artists.items[0].id;
 
     const response = await Promise.all([
       spotifyApi.getArtist(artistId),
       spotifyApi.getArtistTopTracks(artistId, "CA"),
-      spotifyApi.getArtistRelatedArtists(artistId),
+      //spotifyApi.getArtistRelatedArtists(artistId),
       spotifyApi.getArtistAlbums(artistId),
       spotifyApi.getAlbumTracks("47jzrGCudVC17eem7BkxRt"),
     ]);

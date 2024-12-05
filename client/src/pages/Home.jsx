@@ -59,7 +59,8 @@ export const Home = () => {
         .slice(0, 7);
       setTopTracks(topTracks);
 
-      const albumArray = data.data[3].body.items;
+      const albumArray = data.data[2].body.items;
+
       const albums = albumArray.map((album) => [
         album.album_type.charAt(0).toUpperCase() + album.album_type.slice(1),
         album.name,
@@ -69,12 +70,12 @@ export const Home = () => {
       ]);
       setAlbums(albums);
 
-      const relatedArray = data.data[2].body.artists;
-      const related = relatedArray
-        .map((item) => [item.name, item.images[0].url, item.id])
-        .splice(0, 12);
+      // const relatedArray = data.data[2].body.artists;
+      // const related = relatedArray
+      //   .map((item) => [item.name, item.images[0].url, item.id])
+      //   .splice(0, 12);
 
-      setRelatedArtists(related);
+      // setRelatedArtists(related);
 
       setLoading(false);
     } catch (err) {
@@ -148,10 +149,10 @@ export const Home = () => {
                     albumTitle={setAlbumTitle}
                   />
 
-                  <RelatedArtists
+                  {/* <RelatedArtists
                     relatedArtists={relatedArtists}
                     related={setRelated}
-                  />
+                  /> */}
                 </div>
               </div>
             </div>
